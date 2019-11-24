@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import sketch from './sketches/sketch';
+// import logo from './logo.svg';
+import sketch from './sketches/sketch.ts';
 import './App.css';
 import P5Wrapper from 'react-p5-wrapper';
 
