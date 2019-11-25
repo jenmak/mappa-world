@@ -1,15 +1,18 @@
-// import debounce from '../utils/debounce';
-// import throttle from '../utils/throttle';
+import { Country } from "./country";
 export const TWO_PI = 2*Math.PI;
-export const HALF_PI = Math.PI/2;
+export const EARTH_RADIUS = 275;
 
-export default function sketch (p) {
-    let r = 275; // float: sphere's radius
+export default function sketch (p: any) {
     let angleX = 0;
     let angleY = 0;
     let angleZ = 0;
-    let coord; // PVector
-    let points = [ // lat, lon
+    let coord: {
+      x: number,
+      y: number,
+      z: number
+    };
+    let listOfCountries: Country[] = [];
+    let countries = [ // lat, lon
       [40.647560, -74.006340], // ny
       [19.075983, 72.877655], // mumbai
       [22.282150, 114.156883], // hong kong
@@ -20,12 +23,17 @@ export default function sketch (p) {
     let width = 800;
     let height = 800;
 
-    let earth; // image
+    let earth: any; // image
     
     p.setup = function() {
       p.createCanvas(width, height, p.WEBGL);
       coord = p.createVector();
       earth = p.loadImage('earth.jpg');
+
+      // Create the country objects
+      for (let i = 0; i < countries.length; i++) {
+        listOfCountries[i] = new Country(4, countries[i][0], countries[i][1]);
+      }
     }
 
     p.mouseDragged = function() {
@@ -33,7 +41,7 @@ export default function sketch (p) {
       angleX += (p.mouseY - p.pmouseY) * -0.01;
     }
 
-    p.mouseClicked = function(event) {
+    p.mouseClicked = function() {
         // console.log(event);
     }
     
@@ -50,34 +58,15 @@ export default function sketch (p) {
       // earth
       p.texture(earth);
       p.noStroke();
-      p.sphere(r);
+      p.sphere(EARTH_RADIUS);
       
       // points
       p.fill(255,0,0);
       p.stroke(255,0,0);
       p.strokeWeight(20);
       
-      for (let i=0; i<points.length; i++) {
-        let radians = toRadians(points[i][0], points[i][1]);
-        let cartesian = sphereToCart(radians, r);
-        p.point(cartesian.x, cartesian.y, cartesian.z);
+      for (let i=0; i<listOfCountries.length; i++) {
+        p.point(listOfCountries[i].coord.x, listOfCountries[i].coord.y, listOfCountries[i].coord.z);
       }
-    }
-
-    function toRadians(lat, lon) {
-      return {
-        theta: p.radians(lat),
-        phi: p.radians(lon) + HALF_PI
-      };
-    };
-
-   function sphereToCart(rad, r) {
-    return {
-      x: r * p.cos(rad.theta) * p.cos(rad.phi),
-      y: -1 * r * p.sin(rad.theta),
-      z: -1 * r  * p.cos(rad.theta) * p.sin(rad.phi)
-    };
-  };
-
-
+  }
 }
