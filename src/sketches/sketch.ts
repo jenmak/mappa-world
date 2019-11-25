@@ -4,8 +4,8 @@ export const EARTH_RADIUS = 275;
 
 export default function sketch (p: any) {
     let angleX = 0;
-    let angleY = 0;
-    let angleZ = 0;
+    let angleY = -2.4;
+    let angleZ = .3;
     let coord: {
       x: number,
       y: number,
@@ -13,6 +13,8 @@ export default function sketch (p: any) {
     };
     let listOfCountries: Country[] = [];
     let countries = [ // lat, lon
+      // [0,0],
+      // [10, 0],
       [40.647560, -74.006340], // ny
       [19.075983, 72.877655], // mumbai
       [22.282150, 114.156883], // hong kong
@@ -32,7 +34,7 @@ export default function sketch (p: any) {
 
       // Create the country objects
       for (let i = 0; i < countries.length; i++) {
-        listOfCountries[i] = new Country(4, countries[i][0], countries[i][1]);
+        listOfCountries[i] = new Country(8, countries[i][0], countries[i][1]);
       }
     }
 
@@ -60,13 +62,24 @@ export default function sketch (p: any) {
       p.noStroke();
       p.sphere(EARTH_RADIUS);
       
-      // points
-      p.fill(255,0,0);
-      p.stroke(255,0,0);
-      p.strokeWeight(20);
-      
       for (let i=0; i<listOfCountries.length; i++) {
-        p.point(listOfCountries[i].coord.x, listOfCountries[i].coord.y, listOfCountries[i].coord.z);
+        drawCountry(listOfCountries[i]);
       }
+  }
+
+  function drawCountry(country: Country) {
+    let maxh: number = p.pow(10, 7);
+    let boxh: number = p.map(country.h, 0, maxh, 10, 100);
+    let xaxis = new p.createVector(1,0,0);
+    let pos = new p.createVector(country.coord.x, country.coord.y, country.coord.z);
+    let raxis = xaxis.cross(pos);
+    let angleb = pos.angleBetween(xaxis);
+  
+    p.push();
+    p.translate(pos.x, pos.y, pos.z);
+    p.rotate(angleb, raxis);
+    p.fill(236, 195, 11);
+    p.box(boxh, 5, 5);
+    p.pop();
   }
 }

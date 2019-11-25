@@ -5,6 +5,7 @@ export class Country {
   public lat: number;
   public lon: number;
   public mag: number;
+  public h: number;
   public coord: {
     x: number;
     y: number;
@@ -20,7 +21,11 @@ export class Country {
     this.lat = lat;
     this.lon = lon;
     this.radians = this.toRadians(lat, lon);
-    this.coord = this.sphereToCart(this.radians, EARTH_RADIUS)
+    this.coord = this.sphereToCart(this.radians, EARTH_RADIUS);
+    this.h = Math.pow(10, mag);
+  }
+
+  public draw() {
   }
 
   public degreesToRadians(deg: number) {
