@@ -76,11 +76,8 @@ export default function sketch (p: any) {
     public lon: number;
     public mag: number;
     public h: number;
-    public coord: {
-      x: number;
-      y: number;
-      z: number;
-    };
+    public coord: any;
+    private boxh: number;
     private radians: {
       theta: number;
       phi: number;
@@ -92,8 +89,10 @@ export default function sketch (p: any) {
       this.lat = lat;
       this.lon = lon;
       this.radians = this.toRadians(lat, lon);
-      this.coord = this.sphereToCart(this.radians, EARTH_RADIUS);
+      let cart = this.sphereToCart(this.radians, EARTH_RADIUS);
+      this.coord = new p.createVector(cart.x, cart.y, cart.z);
       this.h = Math.pow(10, mag);
+      this.boxh = p.map(this.h, 0, p.pow(10,10), 0, 1.5);
     }
   
     public clicked() {
@@ -105,14 +104,11 @@ export default function sketch (p: any) {
     }
   
     public draw() {
-      let maxh: number = p.pow(10, 10);
-      let boxh: number = p.map(this.h, 0, maxh, 0, 1.5);
-      let pos = new p.createVector(this.coord.x, this.coord.y, this.coord.z);
       p.push();
       p.stroke(236, 195, 11,10);
-      p.line(pos.x,pos.y,pos.z,pos.x*boxh, pos.y*boxh, pos.z*boxh);
-      p.translate(pos.x*boxh, pos.y*boxh, pos.z*boxh);
-      p.sphere(boxh*1.1);
+      p.line(this.coord.x, this.coord.y, this.coord.z, this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
+      p.translate(this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
+      p.sphere(this.boxh*1.1);
       p.pop();
     }
   
