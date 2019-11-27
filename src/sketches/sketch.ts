@@ -10,24 +10,27 @@ export default function sketch (p: any) {
       y: number,
       z: number
     };
-    let data: any;
+    let json: any;
     let listOfCountries: Country[] = [];
 
     let width = 800;
     let height = 800;
+    let currentYear = 2018;
 
     let earth: any; // image
 
     p.preload = function() {
-      data = p.loadJSON('countries.json');
-      // console.log(data);
+      json = p.loadJSON('countries.json');
     }
+
+    // p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {	
+      // console.log(props);
+    // };
     
     p.setup = function() {
-
       // Create the country objects
-      Object.keys(data).forEach((countryName, i) => {
-        listOfCountries[i] = new Country(countryName, 10, data[countryName].Latitude, data[countryName].Longitude)
+      json[currentYear].forEach((country: any, i: number) => {
+        listOfCountries[i] = new Country(country.name, country['Life Ladder'], country.Latitude, country.Longitude)
       });
 
       // Set up the canvas with the earth
@@ -41,12 +44,6 @@ export default function sketch (p: any) {
       angleX += (p.mouseY - p.pmouseY) * -0.01;
     }
 
-    p.mouseClicked = function() {
-      for (let i=0; i<listOfCountries.length; i++) {
-        listOfCountries[i].clicked();
-      }
-    }
-    
     p.draw = function() {
       p.background(0);
       coord.x = 0;
@@ -74,41 +71,36 @@ export default function sketch (p: any) {
     public name: string;
     public lat: number;
     public lon: number;
-    public mag: number;
-    public h: number;
+    public happiness: number;
     public coord: any;
+    private rv: number; // red value
     private boxh: number;
     private radians: {
       theta: number;
       phi: number;
     };
   
-    constructor(name: string, mag: number, lat: number, lon: number) {
+    // happiness: 2 - 9
+    constructor(name: string, happiness: number, lat: number, lon: number) {
       this.name = name;
-      this.mag = mag;
+      this.happiness = happiness;
       this.lat = lat;
       this.lon = lon;
       this.radians = this.toRadians(lat, lon);
       let cart = this.sphereToCart(this.radians, EARTH_RADIUS);
       this.coord = new p.createVector(cart.x, cart.y, cart.z);
-      this.h = Math.pow(10, mag);
-      this.boxh = p.map(this.h, 0, p.pow(10,10), 0, 1.5);
-    }
-  
-    public clicked() {
-      var d = p.dist(p.mouseX, p.mouseY, this.coord.x, this.coord.y)
-      if (d < 50) {
-        console.log(this.name);
-        console.log(d);
-      }
+      // this.boxh = p.map(this.h, 0, p.pow(10,10), 0, 10);
+      this.boxh = 1.1;
+      this.rv = p.map(this.happiness, 2, 9, 255, 0);
+      console.log(this.rv);
     }
   
     public draw() {
       p.push();
-      p.stroke(236, 195, 11,10);
+      p.stroke(Math.floor(this.rv), 188, 255,10); // 151, blue to 222, pink
       p.line(this.coord.x, this.coord.y, this.coord.z, this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
       p.translate(this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
-      p.sphere(this.boxh*1.1);
+      p.sphere(this.boxh*5);
       p.pop();
     }
   
