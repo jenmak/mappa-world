@@ -1,4 +1,4 @@
-export const EARTH_RADIUS = 275;
+export const EARTH_RADIUS = 200;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
@@ -30,7 +30,7 @@ export default function sketch (p: any) {
     p.setup = function() {
       // Create the country objects
       json[currentYear].forEach((country: any, i: number) => {
-        listOfCountries[i] = new Country(country.name, country['Life Ladder'], country.Latitude, country.Longitude)
+        listOfCountries[i] = new Country(country.name, country['Life Ladder'], country['Freedom to make life choices'], country.Latitude, country.Longitude)
       });
 
       // Set up the canvas with the earth
@@ -81,7 +81,7 @@ export default function sketch (p: any) {
     };
   
     // happiness: 2 - 9
-    constructor(name: string, happiness: number, lat: number, lon: number) {
+    constructor(name: string, happiness: number, sizeFactor: number, lat: number, lon: number) {
       this.name = name;
       this.happiness = happiness;
       this.lat = lat;
@@ -89,18 +89,19 @@ export default function sketch (p: any) {
       this.radians = this.toRadians(lat, lon);
       let cart = this.sphereToCart(this.radians, EARTH_RADIUS);
       this.coord = new p.createVector(cart.x, cart.y, cart.z);
-      // this.boxh = p.map(this.h, 0, p.pow(10,10), 0, 10);
-      this.boxh = 1.1;
+      this.boxh = p.map(p.pow(10, sizeFactor), 0, 10, 1, 1.99);
       this.rv = p.map(this.happiness, 2, 9, 255, 0);
-      console.log(this.rv);
     }
   
     public draw() {
       p.push();
-      p.stroke(Math.floor(this.rv), 188, 255,10); // 151, blue to 222, pink
+      p.stroke(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
       p.line(this.coord.x, this.coord.y, this.coord.z, this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
       p.translate(this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
+      p.noStroke();
+      p.fill(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
       p.sphere(this.boxh*5);
+      // p.box(this.boxh);
       p.pop();
     }
   
