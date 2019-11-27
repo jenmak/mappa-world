@@ -1,70 +1,75 @@
 export const EARTH_RADIUS = 200;
 export const HALF_PI = Math.PI/2;
 
+export const DIMENSIONS_MAP: any = {
+  'Life Ladder': {
+    MIN: 0,
+    MAX: 10
+  },
+  'Freedom to make life choices': {
+    MIN: .2,
+    MAX: 1
+  }
+};
+
 export default function sketch (p: any) {
-    let angleX = 0;
-    let angleY = -2.4;
-    let angleZ = .3;
-    let coord: {
-      x: number,
-      y: number,
-      z: number
-    };
-    let json: any;
-    let listOfCountries: Country[] = [];
+  // canvas
+  let width: number = 800;
+  let height: number = 800;
 
-    let width = 800;
-    let height = 800;
-    let currentYear = 2018;
+  // earth
+  let earth: any; // image
+  let angleX: number = 0;
+  let angleY: number = -2.4;
+  let angleZ: number = .3;
 
-    let earth: any; // image
+  // data
+  let json: any = {};
+  let listOfCountries: Country[] = [];
+  let currentYear: number = 2018;
+  let sizeFactor: string = 'Life Ladder';
 
-    p.preload = function() {
-      json = p.loadJSON('countries.json');
+  p.preload = function() {
+    json = p.loadJSON('countries.json');
+  }
+
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {	
+    console.log(props);
+    if (props.sizeFactor) {
+      sizeFactor = props.sizeFactor;
     }
-
-    // p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {	
-      // console.log(props);
-    // };
+  };
     
-    p.setup = function() {
-      // Create the country objects
-      json[currentYear].forEach((country: any, i: number) => {
-        listOfCountries[i] = new Country(country.name, country['Life Ladder'], country['Freedom to make life choices'], country.Latitude, country.Longitude)
-      });
+  p.setup = function() {
+    // Set up the canvas with the earth
+    p.createCanvas(width, height, p.WEBGL);
+    earth = p.loadImage('earth.jpg');
+  }
 
-      // Set up the canvas with the earth
-      p.createCanvas(width, height, p.WEBGL);
-      coord = p.createVector();
-      earth = p.loadImage('earth.jpg');
-    }
+  p.mouseDragged = function() {
+    angleY += (p.mouseX - p.pmouseX) * -0.03;
+    angleX += (p.mouseY - p.pmouseY) * -0.01;
+  }
 
-    p.mouseDragged = function() {
-      angleY += (p.mouseX - p.pmouseX) * -0.03;
-      angleX += (p.mouseY - p.pmouseY) * -0.01;
-    }
+  p.draw = function() {
+    p.background(0);
+    p.lights();
+    p.translate(0, 0, 0);
+    p.rotateX(angleX);
+    p.rotateY(angleY);
+    p.rotateZ(angleZ);
+  
+    // earth
+    p.push();
+    p.texture(earth);
+    p.noStroke();
+    p.sphere(EARTH_RADIUS);
+    p.pop();
 
-    p.draw = function() {
-      p.background(0);
-      coord.x = 0;
-      coord.y = 0;
-      coord.z = 0;
-      p.lights();
-      p.translate(coord);
-      p.rotateX(angleX);
-      p.rotateY(angleY);
-      p.rotateZ(angleZ);
-    
-      // earth
-      p.push();
-      p.texture(earth);
-      p.noStroke();
-      p.sphere(EARTH_RADIUS);
-      p.pop();
-
-      for (let i=0; i<listOfCountries.length; i++) {
-        listOfCountries[i].draw();
-      }
+    json[currentYear].forEach((country: any, i: number) => {
+      listOfCountries[i] = new Country(country.name, country['Life Ladder'], country[sizeFactor], country.Latitude, country.Longitude)
+      listOfCountries[i].draw();
+    });
   }
 
   class Country {
@@ -81,7 +86,7 @@ export default function sketch (p: any) {
     };
   
     // happiness: 2 - 9
-    constructor(name: string, happiness: number, sizeFactor: number, lat: number, lon: number) {
+    constructor(name: string, happiness: number, size: number, lat: number, lon: number) {
       this.name = name;
       this.happiness = happiness;
       this.lat = lat;
@@ -89,7 +94,8 @@ export default function sketch (p: any) {
       this.radians = this.toRadians(lat, lon);
       let cart = this.sphereToCart(this.radians, EARTH_RADIUS);
       this.coord = new p.createVector(cart.x, cart.y, cart.z);
-      this.boxh = p.map(p.pow(10, sizeFactor), 0, 10, 1, 1.99);
+      // this.boxh = p.map(p.pow(10, sizeFactor), 0, 10, 1, 2);
+      this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 2);
       this.rv = p.map(this.happiness, 2, 9, 255, 0);
     }
   

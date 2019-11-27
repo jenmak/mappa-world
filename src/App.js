@@ -9,22 +9,30 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-		activeCountry: 'Afghanistan',
-		year: '2018'
+        activeCountry: null,
+        year: 2018,
+        sizeFactor: 'Life Ladder'
     }
   }
 
-	render () {
-		return (
-			<div>
-				<P5Wrapper
-					sketch={sketch}
-					activeCountry={this.state.activeCountry}
-					year={this.state.year}
-					/>
-			</div>
-		);
+  pressEvent(){
+		this.state.sizeFactor === 'Life Ladder' ? this.setState({sizeFactor: 'Freedom to make life choices'}) : this.setState({sizeFactor:'Life Ladder'});
 	}
+
+    render () {
+      return (
+        <div>
+          <h3>{ this.state.sizeFactor }</h3>
+          <P5Wrapper
+              sketch={sketch}
+              activeCountry={this.state.activeCountry}
+              year={this.state.year}
+              sizeFactor={this.state.sizeFactor}
+              />
+          <button onClick={this.pressEvent.bind(this)}>Change size factor</button>
+        </div>
+      );
+    }
 }
 
 export default App;
