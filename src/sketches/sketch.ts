@@ -1,4 +1,4 @@
-export const EARTH_RADIUS = 200;
+export const EARTH_RADIUS = 160;
 export const HALF_PI = Math.PI/2;
 
 export const DIMENSIONS_MAP: any = {
@@ -8,6 +8,10 @@ export const DIMENSIONS_MAP: any = {
   },
   'Freedom to make life choices': {
     MIN: .2,
+    MAX: 1
+  },
+  'Perceptions of corruption': {
+    MIN: 0,
     MAX: 1
   }
 };
@@ -27,23 +31,30 @@ export default function sketch (p: any) {
   let json: any = {};
   let listOfCountries: Country[] = [];
   let currentYear: number = 2018;
-  let sizeFactor: string = 'Life Ladder';
 
   p.preload = function() {
     json = p.loadJSON('countries.json');
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {	
-    console.log(props);
     if (props.sizeFactor) {
-      sizeFactor = props.sizeFactor;
+      listOfCountries.forEach((country: Country) => {
+        country.setSizeFactor(props.sizeFactor);
+      })
     }
+    // if (props.selectedCountry) {
+    // }
   };
     
   p.setup = function() {
     // Set up the canvas with the earth
     p.createCanvas(width, height, p.WEBGL);
     earth = p.loadImage('earth.jpg');
+
+    // Create country objects
+    json[currentYear].forEach((country: any, i: number) => {
+      listOfCountries[i] = new Country(country)
+    });
   }
 
   p.mouseDragged = function() {
@@ -52,7 +63,7 @@ export default function sketch (p: any) {
   }
 
   p.draw = function() {
-    p.background(0);
+    p.background(255);
     p.lights();
     p.translate(0, 0, 0);
     p.rotateX(angleX);
@@ -66,9 +77,8 @@ export default function sketch (p: any) {
     p.sphere(EARTH_RADIUS);
     p.pop();
 
-    json[currentYear].forEach((country: any, i: number) => {
-      listOfCountries[i] = new Country(country.name, country['Life Ladder'], country[sizeFactor], country.Latitude, country.Longitude)
-      listOfCountries[i].draw();
+    listOfCountries.forEach((country: Country) => {
+      country.draw();
     });
   }
 
@@ -77,26 +87,45 @@ export default function sketch (p: any) {
     public lat: number;
     public lon: number;
     public happiness: number;
+    public corruption: number;
+    public freedom: number;
     public coord: any;
     private rv: number; // red value
     private boxh: number;
-    private radians: {
-      theta: number;
-      phi: number;
-    };
   
     // happiness: 2 - 9
-    constructor(name: string, happiness: number, size: number, lat: number, lon: number) {
-      this.name = name;
-      this.happiness = happiness;
-      this.lat = lat;
-      this.lon = lon;
-      this.radians = this.toRadians(lat, lon);
-      let cart = this.sphereToCart(this.radians, EARTH_RADIUS);
+    constructor(country: any) {
+      this.name = country.Name;
+      this.happiness = country['Life Ladder'];
+      this.corruption = country['Perceptions of corruption'];
+      this.freedom = country['Freedom to make life choices'];
+      this.lat = country.Latitude;
+      this.lon = country.Longitude;
+      this.boxh = 0;
+      let radians = this.toRadians(this.lat, this.lon);
+      let cart = this.sphereToCart(radians, EARTH_RADIUS);
       this.coord = new p.createVector(cart.x, cart.y, cart.z);
-      // this.boxh = p.map(p.pow(10, sizeFactor), 0, 10, 1, 2);
+      this.rv = p.map(this.happiness, DIMENSIONS_MAP['Life Ladder'].MIN, DIMENSIONS_MAP['Life Ladder'].MAX, 255, 0);
+      this.setSizeFactor('Life Ladder');
+    }
+
+    public setSizeFactor(sizeFactor: string) {
+      let size = null;
+      switch(sizeFactor) {
+        case 'Life Ladder':
+          size = this.happiness;
+          break;
+        case 'Perceptions of corruption':
+          size = this.corruption;
+          break;
+        case 'Freedom to make life choices':
+          size = this.freedom;
+          break;
+        default:
+          size = this.happiness;
+          break;
+      }
       this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 2);
-      this.rv = p.map(this.happiness, 2, 9, 255, 0);
     }
   
     public draw() {
@@ -107,7 +136,6 @@ export default function sketch (p: any) {
       p.noStroke();
       p.fill(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
       p.sphere(this.boxh*5);
-      // p.box(this.boxh);
       p.pop();
     }
   
