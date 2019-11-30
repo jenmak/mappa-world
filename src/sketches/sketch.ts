@@ -58,6 +58,7 @@ export const DIMENSIONS_MAP: any = {
 };
 
 export default function sketch (p: any) {
+  let pulse = 0;
   // canvas
   let width: number = 800;
   let height: number = 800;
@@ -77,14 +78,17 @@ export default function sketch (p: any) {
     json = p.loadJSON('countries.json');
   }
 
-  p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {	
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {
     if (props.sizeFactor) {
       listOfCountries.forEach((country: Country) => {
         country.setSizeFactor(props.sizeFactor);
       })
     }
-    // if (props.selectedCountry) {
-    // }
+    if (props.selectedCountry) {
+      listOfCountries.forEach((country: Country) => {
+        country.setSelected(props.selectedCountry);
+      })
+    }
   };
     
   p.setup = function() {
@@ -94,7 +98,8 @@ export default function sketch (p: any) {
 
     // Create country objects
     json[currentYear].forEach((country: any, i: number) => {
-      listOfCountries[i] = new Country(country)
+      listOfCountries[i] = new Country(country);
+      listOfCountries[i].setSelected('Costa Rica');
     });
   }
 
@@ -124,6 +129,7 @@ export default function sketch (p: any) {
   }
 
   class Country {
+    public isSelected: boolean;
     public name: string;
     public lat: number;
     public lon: number;
@@ -143,6 +149,7 @@ export default function sketch (p: any) {
   
     // happiness: 2 - 9
     constructor(country: any) {
+      this.isSelected = false;
       this.name = country.Name;
       this.govtConfidence = country[DIMENSION_NAMES.GOVT_CONFIDENCE];
       this.happiness = country[DIMENSION_NAMES.LIFE_LADDER];
@@ -160,8 +167,12 @@ export default function sketch (p: any) {
       let radians = this.toRadians(this.lat, this.lon);
       let cart = this.sphereToCart(radians, EARTH_RADIUS);
       this.coord = new p.createVector(cart.x, cart.y, cart.z);
-      this.rv = p.map(this.happiness, DIMENSIONS_MAP['Life Ladder'].MIN, DIMENSIONS_MAP['Life Ladder'].MAX, 255, 0);
-      this.setSizeFactor('Life Ladder');
+      this.rv = p.map(this.happiness, DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MIN, DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MAX, 255, 0);
+      this.setSizeFactor(DIMENSION_NAMES.LIFE_LADDER);
+    }
+
+    public setSelected(name: string) {
+      this.isSelected = !!(name === this.name);
     }
 
     public setSizeFactor(sizeFactor: string) {
@@ -212,6 +223,20 @@ export default function sketch (p: any) {
       p.noStroke();
       p.fill(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
       p.sphere(this.boxh*5);
+      if (this.isSelected) {
+        let xaxis = p.createVector(1,0,0);
+        let raxis = xaxis.cross(this.coord);
+        let angleb = this.coord.angleBetween(xaxis);
+        p.rotate(angleb, raxis);	
+        p.torus(5 + pulse, 2);
+        p.torus(15 + pulse, 2);
+        p.torus(25 + pulse,2);
+        if(pulse < 10) {
+          pulse = pulse + .15;
+        } else {
+          pulse = 0;
+        }
+      }
       p.pop();
     }
   

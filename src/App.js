@@ -25,7 +25,7 @@ class App extends React.Component {
       <div>
         {/* TODO: select a country */}
 
-        {/* <h1>{this.state.selectedCountry}</h1> */}
+        <p>{this.state.selectedCountry}</p>
 
         <div className="form-group">
           <label htmlFor="select2" >Dimension</label>
