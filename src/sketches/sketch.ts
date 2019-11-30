@@ -1,18 +1,59 @@
 export const EARTH_RADIUS = 160;
 export const HALF_PI = Math.PI/2;
 
+export const DIMENSION_NAMES = {
+  CORRUPTION: 'Perceptions of corruption',
+  GDP: 'Log GDP per capita',
+  GENEROSITY: 'Generosity',
+  GOVT_CONFIDENCE: 'Confidence in national government',
+  FREEDOM: 'Freedom to make life choices',
+  LIFE_EXPECTANCY: 'Healthy life expectancy at birth',
+  LIFE_LADDER: 'Life Ladder',
+  NEGATIVE_AFFECT: 'Negative affect',
+  POSITIVE_AFFECT: 'Positive affect',
+  SOCIAL_SUPPORT: 'Social support'
+}
+
 export const DIMENSIONS_MAP: any = {
   'Life Ladder': {
-    MIN: 0,
+    MIN: 2.6,
     MAX: 10
+  },
+  'Confidence in national government': {
+    MIN: 0,
+    MAX: 1
   },
   'Freedom to make life choices': {
     MIN: .2,
     MAX: 1
   },
+  'Generosity': {
+    MIN: -.5,
+    MAX: .7
+  },
+  'Healthy life expectancy at birth': {
+    MIN: 30,
+    MAX: 80
+  },
   'Perceptions of corruption': {
     MIN: 0,
     MAX: 1
+  },
+  'Social support': {
+    MIN: .2,
+    MAX: 1
+  },
+  'Log GDP per capita': {
+    MIN: 6,
+    MAX: 12
+  },
+  'Positive affect': {
+    MIN: .3,
+    MAX: 1
+  },
+  'Negative affect': {
+    MIN: 0,
+    MAX: .7
   }
 };
 
@@ -49,7 +90,7 @@ export default function sketch (p: any) {
   p.setup = function() {
     // Set up the canvas with the earth
     p.createCanvas(width, height, p.WEBGL);
-    earth = p.loadImage('earth.jpg');
+    earth = p.loadImage('world.jpg');
 
     // Create country objects
     json[currentYear].forEach((country: any, i: number) => {
@@ -86,9 +127,16 @@ export default function sketch (p: any) {
     public name: string;
     public lat: number;
     public lon: number;
+    public govtConfidence: number;
+    public gdp: number;
+    public generosity: number;
+    public lifeExpectancy: number;
     public happiness: number;
     public corruption: number;
     public freedom: number;
+    public support: number;
+    public positiveAffect: number;
+    public negativeAffect: number;
     public coord: any;
     private rv: number; // red value
     private boxh: number;
@@ -96,9 +144,16 @@ export default function sketch (p: any) {
     // happiness: 2 - 9
     constructor(country: any) {
       this.name = country.Name;
-      this.happiness = country['Life Ladder'];
-      this.corruption = country['Perceptions of corruption'];
-      this.freedom = country['Freedom to make life choices'];
+      this.govtConfidence = country[DIMENSION_NAMES.GOVT_CONFIDENCE];
+      this.happiness = country[DIMENSION_NAMES.LIFE_LADDER];
+      this.corruption = country[DIMENSION_NAMES.CORRUPTION];
+      this.freedom = country[DIMENSION_NAMES.FREEDOM];
+      this.support = country[DIMENSION_NAMES.SOCIAL_SUPPORT];
+      this.gdp = country[DIMENSION_NAMES.GDP];
+      this.generosity = country[DIMENSION_NAMES.GENEROSITY];
+      this.lifeExpectancy = country[DIMENSION_NAMES.LIFE_EXPECTANCY];
+      this.positiveAffect = country[DIMENSION_NAMES.POSITIVE_AFFECT];
+      this.negativeAffect = country[DIMENSION_NAMES.NEGATIVE_AFFECT];
       this.lat = country.Latitude;
       this.lon = country.Longitude;
       this.boxh = 0;
@@ -112,14 +167,35 @@ export default function sketch (p: any) {
     public setSizeFactor(sizeFactor: string) {
       let size = null;
       switch(sizeFactor) {
-        case 'Life Ladder':
+        case DIMENSION_NAMES.LIFE_LADDER:
           size = this.happiness;
           break;
-        case 'Perceptions of corruption':
+        case DIMENSION_NAMES.GOVT_CONFIDENCE:
+          size = this.govtConfidence;
+          break;
+        case DIMENSION_NAMES.CORRUPTION:
           size = this.corruption;
           break;
-        case 'Freedom to make life choices':
+        case DIMENSION_NAMES.FREEDOM:
           size = this.freedom;
+          break;
+        case DIMENSION_NAMES.GDP:
+          size = this.gdp;
+          break;
+        case DIMENSION_NAMES.SOCIAL_SUPPORT:
+          size = this.support;
+          break;
+        case DIMENSION_NAMES.GENEROSITY:
+          size = this.generosity;
+          break;
+        case DIMENSION_NAMES.LIFE_EXPECTANCY:
+          size = this.lifeExpectancy;
+          break;
+        case DIMENSION_NAMES.POSITIVE_AFFECT:
+          size = this.positiveAffect;
+          break;
+        case DIMENSION_NAMES.NEGATIVE_AFFECT:
+          size = this.negativeAffect;
           break;
         default:
           size = this.happiness;
