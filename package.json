@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.14",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,11 +34,12 @@
     ]
   },
   "devDependencies": {
+    "@types/p5": "^0.9.0",
+    "browser-sync": "^2.26.7",
+    "json-loader": "^0.5.7",
+    "npm-run-all": "^4.1.5",
     "p5": "^0.10.2",
     "react-p5-wrapper": "^2.0.0",
-    "@types/p5": "^0.9.0",
-    "npm-run-all": "^4.1.5",
-    "browser-sync": "^2.26.7",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.2"
   }
 }
