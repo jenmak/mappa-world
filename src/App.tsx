@@ -5,6 +5,7 @@ import './App.css';
 import P5Wrapper from 'react-p5-wrapper';
 import countries from './data/countries.json';
 import CountryStats from './components/country-stats';
+import HappinessHeader from './components/happiness-header';
 import { Dropdown } from 'semantic-ui-react'
 import {DIMENSIONS_MAP } from './constants/dimensions';
 
@@ -66,6 +67,9 @@ class App extends React.Component<{}, IAppState> {
   render () {
     return (
       <div>
+        <HappinessHeader
+          sizeFactor={this.state.sizeFactor}
+        />
         <CountryStats
           name={this.state.selectedCountry}
           stats={this.state.countryStats}

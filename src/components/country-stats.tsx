@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
+import { Progress } from 'semantic-ui-react'
 
 export interface ICountryStatsProps {
     name: string;
@@ -17,8 +18,18 @@ export class CountryStats extends Component<ICountryStatsProps, {}> {
                 {
                     stats && 
                     <div>
-                        <h3>{ stats[DIMENSION_NAMES.LIFE_LADDER] }</h3>
-                        <h3>{ stats[sizeFactor] }</h3>
+                        {/* <h3>{ stats[DIMENSION_NAMES.LIFE_LADDER] }</h3> */}
+                        <Progress
+                          value={stats[DIMENSION_NAMES.LIFE_LADDER]}
+                          total={DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MAX}
+                          progress='ratio'
+                          color='blue' />
+
+                        <Progress
+                          value={stats[sizeFactor]}
+                          total={DIMENSIONS_MAP[sizeFactor].MAX}
+                          progress='ratio'
+                          color='teal' />
                     </div>
                 }
             </div>
