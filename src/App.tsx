@@ -1,14 +1,16 @@
 import React from 'react';
 // import logo from './logo.svg';
-import sketch, {DIMENSIONS_MAP} from './sketches/sketch';
+import sketch from './sketches/sketch';
 import './App.css';
 import P5Wrapper from 'react-p5-wrapper';
 import countries from './data/countries.json';
-// import Autocomplete from './components/autocomplete.js';
+import CountryStats from './components/country-stats';
 import { Dropdown } from 'semantic-ui-react'
+import {DIMENSIONS_MAP } from './constants/dimensions';
 
 export interface IAppState {
   countries: any;
+  countryStats: any;
   selectedCountry: string;
   year: number;
   sizeFactor: string;
@@ -20,12 +22,17 @@ class App extends React.Component<{}, IAppState> {
     super(props);
     this.state = {
         countries: countries,
+        countryStats: null,
         selectedCountry: 'United States of America',
         year: 2018,
         sizeFactor: 'Life Ladder'
     };
     this.onSizeFactorChange = this.onSizeFactorChange.bind(this);
     this.onCountryChange = this.onCountryChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.setCountryStats();
   }
 
   onSizeFactorChange(e: any) {
@@ -37,7 +44,14 @@ class App extends React.Component<{}, IAppState> {
   onCountryChange(e: any, d: any) {
     this.setState({
       selectedCountry: d.value
-    })
+    });
+    this.setCountryStats();
+  }
+
+  setCountryStats() {
+    this.setState({ countryStats: this.state.countries[this.state.year].filter((c: any) => {
+      return c.Name === this.state.selectedCountry;
+    })[0] });
   }
 
   dropdownOptions() {
@@ -54,8 +68,11 @@ class App extends React.Component<{}, IAppState> {
   render () {
     return (
       <div>
-        <p>{this.state.selectedCountry}
-        </p>
+        <CountryStats
+          name={this.state.selectedCountry}
+          stats={this.state.countryStats}
+          sizeFactor={this.state.sizeFactor}
+        />
         <Dropdown
           placeholder='Select Country'
           fluid
