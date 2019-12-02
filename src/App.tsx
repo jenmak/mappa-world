@@ -32,7 +32,9 @@ class App extends React.Component<{}, IAppState> {
   }
 
   componentDidMount() {
-    this.setCountryStats();
+    this.setState({ countryStats: this.state.countries[this.state.year].filter((c: any) => {
+      return c.Name === this.state.selectedCountry;
+    })[0] });
   }
 
   onSizeFactorChange(e: any) {
@@ -43,15 +45,11 @@ class App extends React.Component<{}, IAppState> {
 
   onCountryChange(e: any, d: any) {
     this.setState({
-      selectedCountry: d.value
+      selectedCountry: d.value,
+      countryStats: this.state.countries[this.state.year].filter((c: any) => {
+        return c.Name === d.value
+      })[0]
     });
-    this.setCountryStats();
-  }
-
-  setCountryStats() {
-    this.setState({ countryStats: this.state.countries[this.state.year].filter((c: any) => {
-      return c.Name === this.state.selectedCountry;
-    })[0] });
   }
 
   dropdownOptions() {

@@ -45,7 +45,7 @@ export default function sketch (p: any) {
     // Create country objects
     json[currentYear].forEach((country: any, i: number) => {
       listOfCountries[i] = new Country(country);
-      listOfCountries[i].setSelected('Costa Rica');
+      listOfCountries[i].setSelected('United States of America');
     });
   }
 
@@ -97,16 +97,16 @@ export default function sketch (p: any) {
     constructor(country: any) {
       this.isSelected = false;
       this.name = country.Name;
-      this.govtConfidence = country[DIMENSION_NAMES.GOVT_CONFIDENCE];
-      this.happiness = country[DIMENSION_NAMES.LIFE_LADDER];
-      this.corruption = country[DIMENSION_NAMES.CORRUPTION];
-      this.freedom = country[DIMENSION_NAMES.FREEDOM];
-      this.support = country[DIMENSION_NAMES.SOCIAL_SUPPORT];
-      this.gdp = country[DIMENSION_NAMES.GDP];
-      this.generosity = country[DIMENSION_NAMES.GENEROSITY];
-      this.lifeExpectancy = country[DIMENSION_NAMES.LIFE_EXPECTANCY];
-      this.positiveAffect = country[DIMENSION_NAMES.POSITIVE_AFFECT];
-      this.negativeAffect = country[DIMENSION_NAMES.NEGATIVE_AFFECT];
+      this.govtConfidence = country[DIMENSION_NAMES.GOVT_CONFIDENCE] || 0;
+      this.happiness = country[DIMENSION_NAMES.LIFE_LADDER] || 0;
+      this.corruption = country[DIMENSION_NAMES.CORRUPTION] || 0;
+      this.freedom = country[DIMENSION_NAMES.FREEDOM] || 0;
+      this.support = country[DIMENSION_NAMES.SOCIAL_SUPPORT] || 0;
+      this.gdp = country[DIMENSION_NAMES.GDP] || 0;
+      this.generosity = country[DIMENSION_NAMES.GENEROSITY] || 0;
+      this.lifeExpectancy = country[DIMENSION_NAMES.LIFE_EXPECTANCY] || 0;
+      this.positiveAffect = country[DIMENSION_NAMES.POSITIVE_AFFECT] || 0;
+      this.negativeAffect = country[DIMENSION_NAMES.NEGATIVE_AFFECT] || 0;
       this.lat = country.Latitude;
       this.lon = country.Longitude;
       this.boxh = 0;
@@ -158,7 +158,11 @@ export default function sketch (p: any) {
           size = this.happiness;
           break;
       }
-      this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 2);
+      if (size !== 0) {
+        this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 2);
+      } else {
+        this.boxh = 0;
+      }
     }
   
     public draw() {
@@ -169,19 +173,9 @@ export default function sketch (p: any) {
       p.noStroke();
       p.fill(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
       p.sphere(this.boxh*5);
+
       if (this.isSelected) {
-        let xaxis = p.createVector(1,0,0);
-        let raxis = xaxis.cross(this.coord);
-        let angleb = this.coord.angleBetween(xaxis);
-        p.rotate(angleb, raxis);	
-        p.torus(5 + pulse, 2);
-        p.torus(15 + pulse, 2);
-        p.torus(25 + pulse,2);
-        if(pulse < 10) {
-          pulse = pulse + .15;
-        } else {
-          pulse = 0;
-        }
+        this.drawSelected();
       }
       p.pop();
     }
@@ -202,6 +196,21 @@ export default function sketch (p: any) {
         x: r * Math.cos(rad.theta) * Math.cos(rad.phi),
         y: -1 * r * Math.sin(rad.theta),
         z: -1 * r  * Math.cos(rad.theta) * Math.sin(rad.phi)
+      }
+    }
+
+    private drawSelected(): void {
+      let xaxis = p.createVector(1,0,0);
+      let raxis = xaxis.cross(this.coord);
+      let angleb = this.coord.angleBetween(xaxis);
+      p.rotate(angleb, raxis);	
+      p.torus(5 + pulse, 2);
+      p.torus(15 + pulse, 2);
+      p.torus(25 + pulse,2);
+      if(pulse < 10) {
+        pulse = pulse + .15;
+      } else {
+        pulse = 0;
       }
     }
   }
