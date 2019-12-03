@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import sketch from './sketches/sketch';
 import './App.css';
 import P5Wrapper from 'react-p5-wrapper';
@@ -67,10 +66,8 @@ class App extends React.Component<{}, IAppState> {
   render () {
     return (
       <div>
-        <HappinessHeader
-          sizeFactor={this.state.sizeFactor}
-        />
-        <CountryStats
+        <HappinessHeader />
+        {/* <CountryStats
           name={this.state.selectedCountry}
           stats={this.state.countryStats}
           sizeFactor={this.state.sizeFactor}
@@ -96,7 +93,7 @@ class App extends React.Component<{}, IAppState> {
             selectedCountry={this.state.selectedCountry}
             year={this.state.year}
             sizeFactor={this.state.sizeFactor}
-            />
+            /> */}
       </div>
     );
   }
