@@ -13,57 +13,62 @@ export const DIMENSION_NAMES = {
 
 export const DIMENSIONS_MAP: any = {
   'Life Ladder': {
-    AVERAGE: 5.43716,
+    AVERAGE: 5.50213,
     MIN: 2.6,
     MAX: 10,
     QUESTION: 'Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?'
   },
   'Confidence in national government': {
     MIN: 0,
-    MAX: 1
+    MAX: 1,
+    QUESTION: 'Are you confident in the national government?'
   },
   'Freedom to make life choices': {
-    AVERAGE: .73382,
-    MIN: .2,
+    AVERAGE: .78453,
+    MIN: .3,
     MAX: 1,
     QUESTION: 'Are you satisfied or dissatisfied with your freedom to choose what you do with your life?'
   },
   'Generosity': {
-    AVERAGE: 0.00008,
-    MIN: -.5,
-    MAX: .7,
+    AVERAGE: -0.0291,
+    MIN: -.4,
+    MAX: .5,
     QUESTION: 'Have you donated money to a charity in the past month?'
   },
   'Healthy life expectancy at birth': {
-    MIN: 30,
-    MAX: 80
+    AVERAGE: 64.6708,
+    MIN: 48,
+    MAX: 77,
+    QUESTION: 'Healthy life expectancy at birth'
   },
   'Perceptions of corruption': {
-    AVERAGE: .75132,
+    AVERAGE: .73174,
     MIN: 0,
     MAX: 1,
-    QUESTION: 'Is corruption widespread throughout the government or not? Is corruption widespread within businesses or not?'
+    QUESTION: 'Is corruption widespread throughout the government and business?'
   },
   'Social support': {
-    AVERAGE: .81057,
-    MIN: .2,
+    AVERAGE: .81054,
+    MIN: .4,
     MAX: 1,
-    QUESTION: 'If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them, or not?'
+    QUESTION: 'If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them?'
   },
   'Log GDP per capita': {
-    MIN: 6,
-    MAX: 12
+    AVERAGE: 9.25039,
+    MIN: 6.5,
+    MAX: 11.5,
+    QUESTION: 'Gross Domestic Product'
   },
   'Positive affect': {
-    AVERAGE: .70937,
-    MIN: .3,
-    MAX: 1,
+    AVERAGE: .70963,
+    MIN: .4,
+    MAX: .9,
     QUESTION: 'Did you experience happiness or enjoyment during A LOT OF THE DAY yesterday? Did you smile or laugh a lot yesterday?'
   },
   'Negative affect': {
-    AVERAGE: .26568,
+    AVERAGE: .29367,
     MIN: 0,
-    MAX: .7,
+    MAX: .6,
     QUESTION: 'Did you experience worry, sadness or anger during A LOT OF THE DAY yesterday?'
   }
 };
