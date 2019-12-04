@@ -1,11 +1,11 @@
 import React from 'react';
 import sketch from './sketches/sketch';
-import './App.css';
 import P5Wrapper from 'react-p5-wrapper';
 import countries from './data/countries.json';
 import CountryStats from './components/country-stats';
 import HappinessHeader from './components/happiness-header';
-import { Dropdown } from 'semantic-ui-react'
+import QuestionFlipper from './components/question-flipper';
+import { Grid } from 'semantic-ui-react'
 import {DIMENSIONS_MAP } from './constants/dimensions';
 
 export interface IAppState {
@@ -37,9 +37,9 @@ class App extends React.Component<{}, IAppState> {
     })[0] });
   }
 
-  onSizeFactorChange(e: any) {
+  onSizeFactorChange(s: string) {
     this.setState({
-      sizeFactor: e.target && e.target.value
+      sizeFactor: s
     })
   }
 
@@ -67,6 +67,24 @@ class App extends React.Component<{}, IAppState> {
     return (
       <div>
         <HappinessHeader />
+        <Grid columns={2} stackable padded>
+          <Grid.Column color='blue'>
+            <QuestionFlipper
+              sizeFactor={this.state.sizeFactor}
+              changeSizeFactor={this.onSizeFactorChange}
+              />
+            <P5Wrapper
+              sketch={sketch}
+              selectedCountry={this.state.selectedCountry}
+              year={this.state.year}
+              sizeFactor={this.state.sizeFactor}
+              />
+          </Grid.Column>
+          <Grid.Column color='teal'>
+            bar
+          </Grid.Column>
+        </Grid>
+
         {/* <CountryStats
           name={this.state.selectedCountry}
           stats={this.state.countryStats}
@@ -86,14 +104,7 @@ class App extends React.Component<{}, IAppState> {
           {Object.keys(DIMENSIONS_MAP).map(option => {
             return <option value={option} key={option} >{option}</option>
           })}
-        </select>
-        </div>
-        <P5Wrapper
-            sketch={sketch}
-            selectedCountry={this.state.selectedCountry}
-            year={this.state.year}
-            sizeFactor={this.state.sizeFactor}
-            /> */}
+        </select>        </div> */}
       </div>
     );
   }

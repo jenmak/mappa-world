@@ -2,5 +2,4 @@
      User Global Variables
 *******************************/
 @pageBackground: #eff0f1;
-@pageFont: 'Manjari', sans-serif;
-@headerFont: 'Manjari', sans-serif;
+@headerMargin: 0;
