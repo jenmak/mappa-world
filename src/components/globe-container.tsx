@@ -1,5 +1,6 @@
 import React from 'react';
 import sketch from '../sketches/sketch';
+// @ts-ignore
 import P5Wrapper from 'react-p5-wrapper';
 import { connect } from 'react-redux';
 import { ICountryState } from '../reducers/countryReducer';
