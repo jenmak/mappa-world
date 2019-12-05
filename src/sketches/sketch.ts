@@ -50,7 +50,7 @@ export default function sketch (p: any) {
   }
 
   p.mouseDragged = function() {
-    angleY += (p.mouseX - p.pmouseX) * -0.03;
+    angleY += (p.mouseX - p.pmouseX) * 0.03;
     angleX += (p.mouseY - p.pmouseY) * -0.01;
   }
 
@@ -68,6 +68,9 @@ export default function sketch (p: any) {
     p.noStroke();
     p.sphere(EARTH_RADIUS);
     p.pop();
+
+    // rotate
+    angleY -= .001
 
     listOfCountries.forEach((country: Country) => {
       country.draw();
