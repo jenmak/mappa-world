@@ -1,81 +1,52 @@
-import React, { Component } from 'react';
-import { DIMENSIONS_MAP } from '../constants/dimensions';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Grid, Header, Icon } from 'semantic-ui-react';
+import { bindActionCreators } from 'redux';
+import * as CountryActions from '../actions';
+import { ICountryState } from '../reducers/countryReducer';
+import { DIMENSIONS_MAP } from '../constants/dimensions';
 
 export interface IQuestionFlipperProps {
-  changeSizeFactor: (s: string) => void;
-  sizeFactor: string;
-}
-
-export interface IQuestionFlipperState {
   dimensions: string[];
-  sizeFactor: string;
-  sizeFactorIndex: number;
+  questionId: number;
+  actions: any;
 }
 
-export class QuestionFlipper extends Component<IQuestionFlipperProps, IQuestionFlipperState> {
-  
-  constructor(props: IQuestionFlipperProps) {
-    super(props);
-    const dimensions = Object.keys(DIMENSIONS_MAP);
-    this.state = {
-      dimensions,
-      sizeFactor: this.props.sizeFactor,
-      sizeFactorIndex: dimensions.indexOf(this.props.sizeFactor)
-    };
-    this.nextSizeFactor = this.nextSizeFactor.bind(this);
-    this.prevSizeFactor = this.prevSizeFactor.bind(this);
-  }
+const QuestionFlipper = ({ dimensions, questionId, actions}: IQuestionFlipperProps) => (
+  <div>
+    <Grid verticalAlign='middle'>
+      <Grid.Column width='1'>
+        <Header size='huge'>“</Header>
+      </Grid.Column>
+      <Grid.Column width='14'>
+        <Header size='medium' as='h2'>{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</Header>
+      </Grid.Column>
+      <Grid.Column width='1'>
+        <Header size='huge'>”</Header>
+      </Grid.Column>
+    </Grid>
+    {
+      questionId !== 0 &&
+      <Button onClick={actions.getPrevQuestion}>
+        <Icon name='arrow left' />
+      </Button>
+    }
+    {
+      questionId < dimensions.length - 1 && 
+      <Button onClick={actions.getNextQuestion}>
+        <Icon name='arrow right' />
+      </Button>
+    }
+  </div>
+)
 
-  prevSizeFactor() {
-    this.setState({
-      sizeFactorIndex: this.state.sizeFactorIndex - 1,
-      sizeFactor: this.state.dimensions[this.state.sizeFactorIndex - 1]
-    })
-    // this.props.changeSizeFactor(this.state.sizeFactor);
-  }
+const mapStateToProps = (state: { data: ICountryState}) => ({
+  dimensions: state.data.dimensions,
+  questionId: state.data.questionId
+});
 
-  nextSizeFactor() {
-    this.setState({
-      sizeFactorIndex: this.state.sizeFactorIndex + 1,
-      sizeFactor: this.state.dimensions[this.state.sizeFactorIndex + 1]
-    })
-    // this.props.changeSizeFactor(this.state.sizeFactor);
-  }
-  
-  render() {
-    // const { sizeFactor } = this.props;
-    let { dimensions, sizeFactor, sizeFactorIndex } = this.state;
-    console.log(this.state);
-    return (
-      <div>
-        <Grid verticalAlign='middle'>
-          <Grid.Column width='1'>
-            <Header size='huge'>“</Header>
-          </Grid.Column>
-          <Grid.Column width='14'>
-            <Header size='medium' as='h2'>{ DIMENSIONS_MAP[sizeFactor].QUESTION }</Header>
-          </Grid.Column>
-          <Grid.Column width='1'>
-            <Header size='huge'>”</Header>
-          </Grid.Column>
-        </Grid>
-        {
-          sizeFactorIndex != 0 &&
-          <Button onClick={this.prevSizeFactor}>
-            <Icon name='arrow left' />
-          </Button>
-        }
-        {
-          sizeFactorIndex < dimensions.length - 1 && 
-          <Button onClick={this.nextSizeFactor}>
-            <Icon name='arrow right' />
-          </Button>
-        }
-      </div>
+const mapDispatchToProps = (dispatch: any) => ({
+  actions: bindActionCreators(CountryActions, dispatch)
+});
 
-    );
-  }
-}
-
-export default QuestionFlipper;
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionFlipper);
