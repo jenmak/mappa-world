@@ -1,14 +1,16 @@
-import * as TYPES from '../constants/actionTypes'
-import { DIMENSIONS_MAP } from '../constants/dimensions'
+import * as TYPES from '../constants/actionTypes';
+import { DIMENSIONS_MAP } from '../constants/dimensions';
+import countriesJson from '../data/countries.json';
 
 export interface ICountryState {
+  countries: any[],
   country: string,
   dimensions: string[],
   questionId: number
 }
 
 const initialState: ICountryState = {
-    // countries: {},
+    countries: countriesJson[2018],
     // countryStats: {},
     country: 'United States of America',
     dimensions: Object.keys(DIMENSIONS_MAP),
