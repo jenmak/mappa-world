@@ -1,40 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 import { Progress } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import { ICountryState } from '../reducers/countryReducer';
 
 export interface ICountryStatsProps {
-    name: string;
-    stats: any;
-    sizeFactor: string;
+    country: any;
+    questionId: number;
+    dimension: string;
 }
 
-export class CountryStats extends Component<ICountryStatsProps, {}> {
-    render() {
-        const { name, stats, sizeFactor } = this.props;
-        console.log(stats);
-        return (
-            <div>
-                <h1>{name}</h1>
-                {
-                    stats && 
-                    <div>
-                        {/* <h3>{ stats[DIMENSION_NAMES.LIFE_LADDER] }</h3> */}
-                        <Progress
-                          value={stats[DIMENSION_NAMES.LIFE_LADDER]}
-                          total={DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MAX}
-                          progress='ratio'
-                          color='blue' />
+const CountryStats = ({ country, questionId, dimension }: ICountryStatsProps) => (
+  <div>
+      <h1>{country.Name}</h1>
+      <h3>Happiness score</h3>
+      <h2>{country[DIMENSION_NAMES.LIFE_LADDER] }</h2>
+      <Progress
+        value={country[DIMENSION_NAMES.LIFE_LADDER]}
+        total={DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MAX}
+        color='blue' />
+      <h3>compared to world average</h3>
+      <Progress
+        value={DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].AVERAGE}
+        total={DIMENSIONS_MAP[DIMENSION_NAMES.LIFE_LADDER].MAX}
+        color='blue' /> 
 
-                        <Progress
-                          value={stats[sizeFactor]}
-                          total={DIMENSIONS_MAP[sizeFactor].MAX}
-                          progress='ratio'
-                          color='teal' />
-                    </div>
-                }
-            </div>
-        )
-    }
-}
+      {
+        questionId !== 0 &&
+        <div>
+          <h3>{ dimension } score</h3>
+          <Progress
+            value={country[dimension]}
+            total={DIMENSIONS_MAP[dimension].MAX}
+            color='orange' />
+          <h3>compared to world average</h3>
+          <Progress
+            value={DIMENSIONS_MAP[dimension].AVERAGE}
+            total={DIMENSIONS_MAP[dimension].MAX}
+            color='orange' />
+        </div>
+      }
+  </div>
+)
 
-export default CountryStats;
+const mapStateToProps = (state: { data: ICountryState }) => ({
+  country: state.data.countries.filter((c: any) => {
+      return c.Name === state.data.country
+  })[0],
+  questionId: state.data.questionId,
+  dimension: state.data.dimensions[state.data.questionId]
+});
+
+export default connect(mapStateToProps, {})(CountryStats);
