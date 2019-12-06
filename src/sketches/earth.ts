@@ -1,6 +1,6 @@
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 
-export const EARTH_RADIUS = 130;
+export const EARTH_RADIUS = 200;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
@@ -8,8 +8,8 @@ export default function sketch (p: any) {
   let pulse = 0;
   
   // canvas
-  let width: number = 600;
-  let height: number = 600;
+  let width: number = 900;
+  let height: number = 900;
 
   // earth
   let earth: any; // image

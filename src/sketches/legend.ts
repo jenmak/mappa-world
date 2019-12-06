@@ -12,11 +12,7 @@ export default function sketch (p: any) {
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props: any) {
     if (props.sizeFactor) {
-      // p.fill(255);
-      console.log(p);
-      // p.rect(20, 65, 20, 100);
       sizeFactor = props.sizeFactor;
-      // p.text(sizeFactor, 20, 65);
     }
   }
   p.draw = function() {

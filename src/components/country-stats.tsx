@@ -1,6 +1,6 @@
 import React from 'react';
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
-import { Progress, Segment, Statistic } from 'semantic-ui-react'
+import { Grid, Progress, Segment, Header, Item } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { ICountryState } from '../reducers/countryReducer';
 
@@ -13,28 +13,31 @@ export interface ICountryStatsProps {
 
 const CountryStats = ({ country, countries, questionId, dimension }: ICountryStatsProps) => (
   <div>
-    <h1>{country}</h1>
-    <Statistic horizontal label='Happiness' value={`${Math.round(country[DIMENSION_NAMES.LIFE_LADDER]*100)/100}/10`} />
-    <Segment.Group>
+    {/* <h1>{country}</h1> */}
+    {/* <Statistic horizontal label='Happiness' value={`${Math.round(country[DIMENSION_NAMES.LIFE_LADDER]*100)/100}/10`} /> */}
+    {/* <Segment.Group> */}
       {
         countries.map((co: any, i: number) => {
           return <Segment key={i}>
-            <Progress
-              value={co[dimension]}
-              total={DIMENSIONS_MAP[dimension].MAX}
-              size='tiny'
-              label={co.Name}
-              color={co.Name === country ? 'purple' : 'violet'} />
-            {/* <Progress
-              value={DIMENSIONS_MAP[dimension].AVERAGE}
-              total={DIMENSIONS_MAP[dimension].MAX}
-              size='tiny'
-              label='compared to world average'
-              color={dimensions[questionId] === dimension ? 'purple' : 'violet'} /> */}
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={4}>
+                  <Header size='small'>{i+1}. {co.Name}</Header>
+                </Grid.Column>
+                <Grid.Column width={12}>
+                  <Progress
+                    value={Math.round(co[dimension]*100)/100}
+                    total={DIMENSIONS_MAP[dimension].MAX}
+                    size='small'
+                    progress={'value'}
+                    color={co.Name === country ? 'purple' : 'violet'} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Segment>
         })
       }
-    </Segment.Group>
+    {/* </Segment.Group> */}
   </div>
 )
 
