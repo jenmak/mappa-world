@@ -10,11 +10,11 @@ const App = () => (
   <div>
     <HappinessHeader />
     <Grid columns={2} padded>
-      <Grid.Column mobile={16} tablet={16} computer={10} color='blue'>
+      <Grid.Column mobile={16} tablet={16} computer={8}>
         <QuestionFlipper />
         <GlobeContainer />
       </Grid.Column>
-      <Grid.Column mobile={16} tablet={16} computer={6} color='teal'>
+      <Grid.Column mobile={16} tablet={16} computer={8}>
         <CountryDropdown />
         <CountryStats />
       </Grid.Column>

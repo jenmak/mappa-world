@@ -1,13 +1,13 @@
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 
-export const EARTH_RADIUS = 160;
+export const EARTH_RADIUS = 130;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
   let pulse = 0;
   // canvas
-  let width: number = 800;
-  let height: number = 800;
+  let width: number = 600;
+  let height: number = 600;
 
   // earth
   let earth: any; // image
