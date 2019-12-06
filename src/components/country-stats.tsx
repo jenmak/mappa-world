@@ -17,8 +17,8 @@ const CountryStats = ({ country, countries, questionId, dimension }: ICountrySta
     <Statistic horizontal label='Happiness' value={`${Math.round(country[DIMENSION_NAMES.LIFE_LADDER]*100)/100}/10`} />
     <Segment.Group>
       {
-        countries.map((co) => {
-          return <Segment>
+        countries.map((co: any, i: number) => {
+          return <Segment key={i}>
             <Progress
               value={co[dimension]}
               total={DIMENSIONS_MAP[dimension].MAX}

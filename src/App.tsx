@@ -8,14 +8,14 @@ import { Grid } from 'semantic-ui-react'
 
 const App = () => (
   <div>
-    <HappinessHeader />
+    {/* <HappinessHeader /> */}
     <Grid columns={2} padded>
       <Grid.Column mobile={16} tablet={16} computer={8}>
-        <QuestionFlipper />
         <GlobeContainer />
       </Grid.Column>
       <Grid.Column mobile={16} tablet={16} computer={8}>
-        <CountryDropdown />
+        <QuestionFlipper />
+        {/* <CountryDropdown /> */}
         <CountryStats />
       </Grid.Column>
     </Grid>

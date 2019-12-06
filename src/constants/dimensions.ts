@@ -13,6 +13,7 @@ export const DIMENSION_NAMES = {
 
 export const DIMENSIONS_MAP: any = {
   'Life Ladder': {
+    SHORT: 'Happiness',
     QUESTION_ID: 0,
     AVERAGE: 5.50213,
     MIN: 2.6,
@@ -20,12 +21,14 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?'
   },
   'Confidence in national government': {
+    SHORT: 'Government confidence',
     QUESTION_ID: 1,
     MIN: 0,
     MAX: 1,
     QUESTION: 'Are you confident in the national government?'
   },
   'Freedom to make life choices': {
+    SHORT: 'Freedom of choice',
     QUESTION_ID: 2,
     AVERAGE: .78453,
     MIN: .3,
@@ -33,6 +36,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Are you satisfied or dissatisfied with your freedom to choose what you do with your life?'
   },
   'Generosity': {
+    SHORT: 'Generosity',
     QUESTION_ID: 3,
     AVERAGE: -0.0291,
     MIN: -.4,
@@ -40,6 +44,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Have you donated money to a charity in the past month?'
   },
   'Healthy life expectancy at birth': {
+    SHORT: 'Life expectancy',
     QUESTION_ID: 4,
     AVERAGE: 64.6708,
     MIN: 48,
@@ -47,6 +52,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Healthy life expectancy at birth'
   },
   'Perceptions of corruption': {
+    SHORT: 'Corruption',
     QUESTION_ID: 5,
     AVERAGE: .73174,
     MIN: 0,
@@ -54,6 +60,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Is corruption widespread throughout the government and business?'
   },
   'Social support': {
+    SHORT: 'Support',
     QUESTION_ID: 6,
     AVERAGE: .81054,
     MIN: .4,
@@ -61,6 +68,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them?'
   },
   'Log GDP per capita': {
+    SHORT: 'GDP',
     QUESTION_ID: 7,
     AVERAGE: 9.25039,
     MIN: 6.5,
@@ -68,6 +76,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Gross Domestic Product'
   },
   'Positive affect': {
+    SHORT: 'Positivity',
     QUESTION_ID: 8,
     AVERAGE: .70963,
     MIN: .4,
@@ -75,6 +84,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Did you experience happiness or enjoyment during A LOT OF THE DAY yesterday? Did you smile or laugh a lot yesterday?'
   },
   'Negative affect': {
+    SHORT: 'Negativity',
     QUESTION_ID: 9,
     AVERAGE: .29367,
     MIN: 0,
