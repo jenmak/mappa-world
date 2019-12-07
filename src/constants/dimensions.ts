@@ -14,22 +14,24 @@ export const DIMENSION_NAMES = {
 export const DIMENSIONS_MAP: any = {
   'Life Ladder': {
     SHORT: 'Happiness',
-    QUESTION_ID: 0,
+    IS_BOOLEAN: false,
     AVERAGE: 5.50213,
     MIN: 2.6,
     MAX: 10,
+    UNITS: 'Happiness score',
     QUESTION: 'Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?'
   },
   'Confidence in national government': {
     SHORT: 'Government confidence',
-    QUESTION_ID: 1,
+    IS_BOOLEAN: true,
+    AVERAGE: .49512,
     MIN: 0,
     MAX: 1,
-    QUESTION: 'Are you confident in the national government?'
+    QUESTION: 'Are you confident in the military? The judicial system and courts? The national government? How about honesty of elections?'
   },
   'Freedom to make life choices': {
     SHORT: 'Freedom of choice',
-    QUESTION_ID: 2,
+    IS_BOOLEAN: true,
     AVERAGE: .78453,
     MIN: .3,
     MAX: 1,
@@ -37,7 +39,7 @@ export const DIMENSIONS_MAP: any = {
   },
   'Generosity': {
     SHORT: 'Generosity',
-    QUESTION_ID: 3,
+    IS_BOOLEAN: true,
     AVERAGE: -0.0291,
     MIN: -.4,
     MAX: .5,
@@ -45,15 +47,16 @@ export const DIMENSIONS_MAP: any = {
   },
   'Healthy life expectancy at birth': {
     SHORT: 'Life expectancy',
-    QUESTION_ID: 4,
+    IS_BOOLEAN: false,
     AVERAGE: 64.6708,
     MIN: 48,
     MAX: 77,
+    UNITS: 'Years',
     QUESTION: 'Healthy life expectancy at birth'
   },
   'Perceptions of corruption': {
     SHORT: 'Corruption',
-    QUESTION_ID: 5,
+    IS_BOOLEAN: true,
     AVERAGE: .73174,
     MIN: 0,
     MAX: 1,
@@ -61,7 +64,7 @@ export const DIMENSIONS_MAP: any = {
   },
   'Social support': {
     SHORT: 'Support',
-    QUESTION_ID: 6,
+    IS_BOOLEAN: true,
     AVERAGE: .81054,
     MIN: .4,
     MAX: 1,
@@ -69,15 +72,16 @@ export const DIMENSIONS_MAP: any = {
   },
   'Log GDP per capita': {
     SHORT: 'GDP',
-    QUESTION_ID: 7,
+    IS_BOOLEAN: false,
     AVERAGE: 9.25039,
     MIN: 6.5,
     MAX: 11.5,
+    UNITS: 'Log GDP per capita',
     QUESTION: 'Gross Domestic Product'
   },
   'Positive affect': {
     SHORT: 'Positivity',
-    QUESTION_ID: 8,
+    IS_BOOLEAN: true,
     AVERAGE: .70963,
     MIN: .4,
     MAX: .9,
@@ -85,6 +89,7 @@ export const DIMENSIONS_MAP: any = {
   },
   'Negative affect': {
     SHORT: 'Negativity',
+    IS_BOOLEAN: true,
     QUESTION_ID: 9,
     AVERAGE: .29367,
     MIN: 0,

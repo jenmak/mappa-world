@@ -11,10 +11,8 @@ export interface ICountryState {
 
 const initialState: ICountryState = {
     countries: countriesJson[2018],
-    // countryStats: {},
     country: 'United States of America',
     dimensions: Object.keys(DIMENSIONS_MAP),
-    // year: 2018,
     questionId: 0
   };
 

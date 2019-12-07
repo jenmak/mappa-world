@@ -9,7 +9,7 @@ import { Grid } from 'semantic-ui-react'
 const App = () => (
   <div>
     {/* <HappinessHeader /> */}
-    <Grid columns={2} padded>
+    <Grid columns={2}>
       <Grid.Column mobile={16} tablet={16} computer={10}>
         <GlobeContainer />
       </Grid.Column>

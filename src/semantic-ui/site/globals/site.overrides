@@ -4,6 +4,7 @@
 .globe {
     position: fixed;
     top: 0;
+    left: 0;
     bottom: 0;
     z-index: 0;
 }
@@ -13,4 +14,16 @@
     top: 0;
     left: 0;
     z-index: 1;
+}
+
+.ui.segments.countryStats {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 360px;
+}
+
+.countries {
+    height: 268px;
+    overflow-y: scroll;
 }
