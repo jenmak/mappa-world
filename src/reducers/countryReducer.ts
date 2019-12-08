@@ -6,6 +6,7 @@ export interface ICountryState {
   countries: any[],
   country: string,
   dimensions: string[],
+  isSidebarVisible: boolean,
   questionId: number
 }
 
@@ -13,6 +14,7 @@ const initialState: ICountryState = {
     countries: countriesJson[2018],
     country: 'United States of America',
     dimensions: Object.keys(DIMENSIONS_MAP),
+    isSidebarVisible: false,
     questionId: 0
   };
 
@@ -24,6 +26,8 @@ const countryReducer = (state = initialState, action: { type: string, country: s
       return Object.assign({}, state, { questionId: state.questionId - 1 });
     case TYPES.SET_CURRENT_COUNTRY:
       return Object.assign({}, state, { country: action.country });
+    case TYPES.TOGGLE_SIDEBAR:
+      return Object.assign({}, state, { isSidebarVisible: !state.isSidebarVisible })
     default:
       return state;
   }

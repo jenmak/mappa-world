@@ -1,25 +1,68 @@
 import React from 'react';
 import CountryStats from './components/country-stats';
-import CountryDropdown from './components/country-dropdown';
 import GlobeContainer from './components/globe-container';
-import HappinessHeader from './components/happiness-header';
 import QuestionFlipper from './components/question-flipper';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Header, Reveal, Image, Icon, Menu, Segment, Sidebar, CommentActions } from 'semantic-ui-react'
+import { render } from 'react-dom';
+import earth from './sketches/earth';
+// @ts-ignore
+import P5Wrapper from 'react-p5-wrapper';
+import { connect } from 'react-redux';
+import { DIMENSIONS_MAP } from './constants/dimensions';
+import { bindActionCreators } from 'redux';
+import * as CountryActions from './actions';
 
-const App = () => (
-  <div>
-    {/* <HappinessHeader /> */}
-    <Grid columns={2}>
-      <Grid.Column mobile={16} tablet={16} computer={10}>
-        <GlobeContainer />
-      </Grid.Column>
-      <Grid.Column mobile={16} tablet={16} computer={6}>
-        <QuestionFlipper />
-        {/* <CountryDropdown /> */}
+class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, {}> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  // componentDidMount() {
+  //   this.setState({ loaded: true})
+  // }
+
+  render() {
+    const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
+    return(
+      <Sidebar.Pushable as={Segment}>
         <CountryStats />
-      </Grid.Column>
-    </Grid>
-  </div>
-);
+        <Sidebar.Pusher>
+          <Segment basic>
+            <Header as='h3'>Application Content</Header>
+            <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </Segment>
+        </Sidebar.Pusher>
+    </Sidebar.Pushable>
+    )
 
-export default App;
+
+        {/* legend */}
+        // <div className="mainContainer-icons">
+        //   <Icon name='question' size='large' circular link />
+        //   <Icon onClick={() => this.setState({ isSidebarVisible: !isSidebarVisible })} name='chart bar outline' rotated='clockwise' size='large' circular link />
+        // </div>
+      // <Header size='huge' as='h1'>{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</Header>
+        // <div className='globe'>
+        //     <P5Wrapper
+        //       sketch={earth}
+        //       selectedCountry={country}
+        //       sizeFactor={dimensions[questionId]}
+        //     />
+        // </div>
+    // )
+  }
+}
+
+const mapStateToProps = (state: { data: any}) => ({
+  country: state.data.country,
+  dimensions: state.data.dimensions,
+  questionId: state.data.questionId,
+  isSidebarVisible: state.data.isSidebarVisible
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  actions: bindActionCreators(CountryActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -12,3 +12,7 @@ export const setCurrentCountry = (country: string) => ({
     type: TYPES.SET_CURRENT_COUNTRY,
     country
 })
+
+export const toggleSidebar = () => ({
+    type: TYPES.TOGGLE_SIDEBAR
+})

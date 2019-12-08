@@ -4,6 +4,8 @@ export const EARTH_RADIUS = 200;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
+  let isLoaded = false;
+
   // selected country animation
   let pulse = 0;
   
@@ -23,6 +25,7 @@ export default function sketch (p: any) {
   let currentYear: number = 2018;
 
   p.preload = function() {
+    earth = p.loadImage('world.jpg');
     json = p.loadJSON('countries.json');
   }
 
@@ -42,13 +45,13 @@ export default function sketch (p: any) {
   p.setup = function() {
     // Set up the canvas with the earth
     p.createCanvas(width, height, p.WEBGL);
-    earth = p.loadImage('world.jpg');
 
     // Create country objects
     json[currentYear].forEach((country: any, i: number) => {
       listOfCountries[i] = new Country(country);
-      listOfCountries[i].setSelected('United States of America');
+      listOfCountries[i].setSelected('Finland');
     });
+    isLoaded = true;
   }
 
   p.mouseDragged = function() {

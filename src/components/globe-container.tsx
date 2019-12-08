@@ -21,13 +21,7 @@ const GlobeContainer = ({ country, dimensions, questionId }: IGlobeContainerProp
         sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
       />
     </div>
-    <div className='globe'>
-      <P5Wrapper
-        sketch={earth}
-        selectedCountry={country}
-        sizeFactor={dimensions[questionId]}
-      />
-    </div>
+
   </div>
 
 )
