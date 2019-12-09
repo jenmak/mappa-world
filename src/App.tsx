@@ -24,8 +24,6 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
       <Sidebar.Pushable as={Segment}>
         <CountryStats />
         <Sidebar.Pusher>
-
-
           <Segment basic className="mainContainer">
             <Header as='h3'>Application Content</Header>
             <div className="mainContainer-icons--topRight">

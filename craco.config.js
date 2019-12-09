@@ -1,14 +1,14 @@
 const purgecss = require('@fullhuman/postcss-purgecss');
 
 module.exports = {
+  plugins: [{ plugin: require('@semantic-ui-react/craco-less') }],
   style: {
     postcss: {
       plugins: [
         purgecss({
-          content: ['./build/**/*.html', './build/**/*.js'],
+          content: ['./src/**/*.html', './src/**/*.tsx', './src/**/*.ts'],
         }),
       ],
     },
-  },
-  plugins: [{ plugin: require('@semantic-ui-react/craco-less') }]
+  }
 };
