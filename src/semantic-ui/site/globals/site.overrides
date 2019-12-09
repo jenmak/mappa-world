@@ -4,10 +4,14 @@
 
 .mainContainer {
     height: 100vh;
+    position: relative;
 }
 
 .mainContainer-icons {
-
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 5;
 }
 
 /** redo VVV **/

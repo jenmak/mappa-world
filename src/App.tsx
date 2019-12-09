@@ -17,31 +17,30 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     super(props);
   }
 
-  // componentDidMount() {
-  //   this.setState({ loaded: true})
-  // }
-
   render() {
     const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
     return(
       <Sidebar.Pushable as={Segment}>
         <CountryStats />
         <Sidebar.Pusher>
-          <Segment basic>
+
+
+
+          <Segment basic className="mainContainer">
             <Header as='h3'>Application Content</Header>
-            <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
+            <div className="mainContainer-icons--topRight">
+              <Icon name='question' size='large' circular link />
+              <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
+            </div>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          </Segment>
+
+            <div className="mainContainer-icons--bottomLeft">
+              <Icon name='arrows alternate' size='large' />
+            </div>
+        </Segment>
         </Sidebar.Pusher>
     </Sidebar.Pushable>
     )
-
-
-        {/* legend */}
-        // <div className="mainContainer-icons">
-        //   <Icon name='question' size='large' circular link />
-        //   <Icon onClick={() => this.setState({ isSidebarVisible: !isSidebarVisible })} name='chart bar outline' rotated='clockwise' size='large' circular link />
-        // </div>
       // <Header size='huge' as='h1'>{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</Header>
         // <div className='globe'>
         //     <P5Wrapper
