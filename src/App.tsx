@@ -20,7 +20,6 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
   render() {
     const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
     return(
-      <div className="ui">
       <Sidebar.Pushable as={Segment}>
         <CountryStats />
         <Sidebar.Pusher>
@@ -38,7 +37,6 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
         </Segment>
         </Sidebar.Pusher>
     </Sidebar.Pushable>
-    </div>
     )
       // <Header size='huge' as='h1'>{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</Header>
         // <div className='globe'>
