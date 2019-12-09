@@ -22,7 +22,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "postbuild": "purgecss --css build/static/css/*.css --content build/static/js/*.js --out build/static/css"
+    "postbuild": "purgecss -c purgecss.config.js -o build/static/css"
   },
   "eslintConfig": {
     "extends": "react-app"
