@@ -12,7 +12,7 @@ export interface ICountryState {
 
 const initialState: ICountryState = {
     countries: countriesJson[2018],
-    country: 'United States of America',
+    country: 'Finland',
     dimensions: Object.keys(DIMENSIONS_MAP),
     isSidebarVisible: false,
     questionId: 0
