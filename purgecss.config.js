@@ -1,7 +1,15 @@
-// purgecss --css build/static/css/*.css --content src/**/*.js --out build/static/css
 module.exports = {
-  content: ['index.html'],
+  content: ['build/static/js/*.js'],
   css: ['build/static/css/*.css'],
   fontFace: true,
-  keyframes: true
-}
+  keyframes: true,
+  rejected: true,
+  extractors: [{
+      extractor: class {
+          static extract(content) {
+          return content.match(/[A-z0-9-:\/]+/g) || []
+          }
+      },
+      extensions: ['js']
+  }]
+};
