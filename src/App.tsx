@@ -2,7 +2,7 @@ import React from 'react';
 import CountryStats from './components/country-stats';
 // import GlobeContainer from './components/globe-container';
 // import QuestionFlipper from './components/question-flipper';
-import { Icon, Segment, Sidebar } from 'semantic-ui-react'
+import { Dimmer, Icon, Loader, Segment, Sidebar } from 'semantic-ui-react'
 // import { render } from 'react-dom';
 import legend from './sketches/legend';
 // @ts-ignore
@@ -12,18 +12,36 @@ import { DIMENSIONS_MAP } from './constants/dimensions';
 import { bindActionCreators } from 'redux';
 import * as CountryActions from './actions';
 
-class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, {}> {
+class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, { isLoading: boolean }> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.isLoading) {
+      setTimeout(() => {
+        this.setState({ isLoading: false});
+      }, 3000);
+    }
   }
 
   render() {
     const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
+    let { isLoading } = this.state;
     return(
       <Sidebar.Pushable as={Segment}>
         <CountryStats />
         <Sidebar.Pusher>
           <Segment basic className="mainContainer">
+            {
+              isLoading &&
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer>
+            }
             <div className="mainContainer-icons--topRight">
               <Icon name='question' size='large' circular link />
               <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
