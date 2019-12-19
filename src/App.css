@@ -10,16 +10,23 @@ h1 {
     font-family: 'Playfair Display SC', sans-serif;
 }
 
-@media (min-width: 768px) {
-    .globe {
-        /* position: fixed;
-        top: 0;
-        z-index: 0; */
-    }
+.fadeOut{
+    opacity:0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+.fadeIn{
+    opacity:1;
+    visibility: visible;
+    transition: all 0.5s 0.5s;
 }
 
+
+
+
+@media (min-width: 768px) {
+}
 .mobile {
-    
 }
 
 /* linear-gradient(115deg, rgba(86, 216, 228,1) 5%,rgba(159, 1, 234,1) 95%) */
