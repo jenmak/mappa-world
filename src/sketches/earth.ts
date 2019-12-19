@@ -1,11 +1,9 @@
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 
-export const EARTH_RADIUS = 200;
+export const EARTH_RADIUS = 250;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
-  let isLoaded = false;
-
   // selected country animation
   let pulse = 0;
   
@@ -40,6 +38,9 @@ export default function sketch (p: any) {
         country.setSelected(props.selectedCountry);
       })
     }
+    if (props.isMobile) {
+      width = 300;
+    }
   };
     
   p.setup = function() {
@@ -51,7 +52,6 @@ export default function sketch (p: any) {
       listOfCountries[i] = new Country(country);
       listOfCountries[i].setSelected('Finland');
     });
-    isLoaded = true;
   }
 
   p.mouseDragged = function() {
@@ -60,7 +60,7 @@ export default function sketch (p: any) {
   }
 
   p.draw = function() {
-    p.background(255);
+    p.background(26, 27, 75);
     p.lights();
     p.translate(0, 0, 0);
     p.rotateX(angleX);
@@ -212,6 +212,7 @@ export default function sketch (p: any) {
       let raxis = xaxis.cross(this.coord);
       let angleb = this.coord.angleBetween(xaxis);
       p.rotate(angleb, raxis);	
+      p.fill(247, 164, 0); // yellow
       p.torus(5 + pulse, 2);
       p.torus(15 + pulse, 2);
       p.torus(25 + pulse,2);

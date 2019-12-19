@@ -1,3 +1,9 @@
+const { POSTCSS_MODES } = require("@craco/craco");
+
 module.exports = {
-  plugins: [{ plugin: require('@semantic-ui-react/craco-less') }]
+  style: {
+    postcss: {
+      mode: POSTCSS_MODES.file
+    }
+  }
 };

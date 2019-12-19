@@ -1,7 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-@firstMargin: 0;
-@lastMargin: 0;
-@margin: 0;

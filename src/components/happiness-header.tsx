@@ -1,14 +1,18 @@
 import React from 'react';
-import { Grid, Header, Image } from 'semantic-ui-react'
-import logo from '../logo.svg';
 
 const HappinessHeader = () => (
-  <Grid columns='1' padded>
-    <Header size='large' as='h1'>
-      <Image src={logo} avatar={true} />
-      World Happiness Visualization
-    </Header>
-  </Grid>
+  <div>
+    <div className="bg-purple-darker opacity-75 fixed z-10 w-full h-screen"></div>
+    <div className="p-24 flex flex-col justify-center w-full h-screen fixed z-20">
+      <div>
+        <h2 className="text-2xl md:text-3xl text-white">Visualizing</h2>
+        <h1 className="text-4xl md:text-6xl text-white">World <span className="text-cyan">Happiness</span></h1>
+      </div>
+      <div>
+        <button className="bg-cyan">Click to view</button>
+      </div>
+    </div>
+  </div>
 )
 
 export default HappinessHeader;

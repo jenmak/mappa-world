@@ -1,8 +1,7 @@
 import React from 'react';
 import CountryStats from './components/country-stats';
 // import GlobeContainer from './components/globe-container';
-// import QuestionFlipper from './components/question-flipper';
-import { Dimmer, Icon, Loader, Segment, Sidebar } from 'semantic-ui-react'
+import QuestionFlipper from './components/question-flipper';
 import legend from './sketches/legend';
 import earth from './sketches/earth';
 // @ts-ignore
@@ -11,40 +10,67 @@ import { connect } from 'react-redux';
 import { DIMENSIONS_MAP } from './constants/dimensions';
 import { bindActionCreators } from 'redux';
 import * as CountryActions from './actions';
+import HappinessHeader from './components/happiness-header';
 
-class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, { isLoading: boolean }> {
+class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, { width: number }> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      width: window.innerWidth
+    }
+  }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
   }
 
   render() {
     const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
+    const { width } = this.state;
+    const isMobile = width <= 500;
     return(
-      <Sidebar.Pushable as={Segment}>
-        <CountryStats />
-        <Sidebar.Pusher>
-          <Segment basic className="mainContainer">
-            <div className="mainContainer-icons--topRight">
-              <Icon name='question' size='large' circular link />
-              <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
-            </div>
+      <div className={`${isMobile ? 'mobile' : 'desktop'}`}>
+        <HappinessHeader />
+        <div className='globe'>
             <P5Wrapper
-                sketch={legend}
-                sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
-              />
-            <div className='globe'>
-                <P5Wrapper
-                  sketch={earth}
-                  selectedCountry={country}
-                  sizeFactor={dimensions[questionId]}
-                />
-            </div>
-            <div className="mainContainer-icons--bottomLeft">
-              <Icon name='arrows alternate' size='large' />
-            </div>
-        </Segment>
-        </Sidebar.Pusher>
-    </Sidebar.Pushable>
+              sketch={earth}
+              isMobile={isMobile}
+              selectedCountry={country}
+              sizeFactor={dimensions[questionId]}
+            />
+        </div>
+      </div>
+    //   <Sidebar.Pushable as={Segment}>
+    //     <CountryStats />
+    //     <Sidebar.Pusher>
+    //       <Segment basic className="mainContainer">
+    //         <div className="mainContainer-icons--topRight">
+    //           <Icon name='question' size='large' circular link />
+    //           <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
+    //         </div>
+    //         <div className='legend'>
+    //           <P5Wrapper
+    //               sketch={legend}
+    //               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
+    //             />
+    //         </div>
+    //         <div className='questionFlipper'>
+    //           <QuestionFlipper />
+    //         </div>
+    //         <div className="mainContainer-icons--bottomLeft">
+    //           <Icon name='arrows alternate' size='large' />
+    //         </div>
+    //     </Segment>
+    //     </Sidebar.Pusher>
+    // </Sidebar.Pushable>
     )
   }
 }
