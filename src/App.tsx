@@ -39,7 +39,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     return(
       <div className={`${isMobile ? 'mobile' : 'desktop'}`}>
         <HappinessHeader />
-        <div className='globe'>
+        <div className='globe bg-purple-darker'>
             <P5Wrapper
               sketch={earth}
               isMobile={isMobile}

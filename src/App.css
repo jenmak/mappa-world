@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-h2 {
-    font-family: 'Satisfy', cursive;
-}
-
-h1 {
-    font-family: 'Playfair Display SC', sans-serif;
-}
-
 .fadeOut{
     opacity:0;
     visibility: hidden;
@@ -24,9 +16,8 @@ h1 {
 
 
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
 }
 .mobile {
-}
-
+} */
 /* linear-gradient(115deg, rgba(86, 216, 228,1) 5%,rgba(159, 1, 234,1) 95%) */

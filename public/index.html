@@ -25,12 +25,48 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Visualizing World Happiness</title>
+    <style>
+        h2 {
+            font-family: 'Satisfy', cursive;
+        }
+
+        h1 {
+            font-family: 'Playfair Display SC', sans-serif;
+        }
+
+        #root {
+          padding: 0;
+        }
+
+        .loading-screen {
+          background: #1a1b4b;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 6rem;
+          height: 100vh;
+        }
+        .loading-screen-h1 {
+          padding: 0;
+          color: white;
+          font-size: 4rem;
+        }
+        .loading-screen-h2 {
+          padding: 0;
+          color: white;
+          font-size: 1.875rem;
+        }
+
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-      <div>Loading...</div>
+      <div class="loading-screen">
+        <h2 class="loading-screen-h2">Visualizing</h2>
+        <h1 class="loading-screen-h1">World Happiness</h1>
+      </div>
     </div>
     <!--
       This HTML file is a template.
