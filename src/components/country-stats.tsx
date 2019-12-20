@@ -29,7 +29,7 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isSidebarVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className="bg-white border border-solid border-white rounded fixed z-10 right-0 top-0 my-56 mx-16 w-1/3 lg:w-1/4">
+      <div className="bg-white border border-solid border-white rounded fixed z-10 right-0 bottom-0 md:bottom-auto md:top-0 m-12 md:my-56 md:mx-16 md:w-1/3 lg:w-1/4">
         <table className="table-fixed w-full">
           <thead className="flex w-full">
             <tr className="flex w-full">
@@ -49,10 +49,10 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
                 return (i < 25 || showAll) &&
                 <tr className="flex w-full cursor-pointer"
                     key={i} onClick={() => actions.setCurrentCountry(co.Name)}>
-                    <td className="p-2 w-1/2">
+                    <td className="p-2 w-1/2 text-xs">
                       {i+1}. {co.Name}
                     </td>
-                    <td className="p-2 w-1/2">
+                    <td className="p-2 w-1/2 text-xs">
                       {Math.round(co[dimension]*100/100)}
                       {/* <Progress
                         value={Math.round(co[dimension]*100)/100}

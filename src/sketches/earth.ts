@@ -1,6 +1,5 @@
 import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 
-export const EARTH_RADIUS = 250;
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
@@ -12,6 +11,7 @@ export default function sketch (p: any) {
   let height: number = 1000;
 
   // earth
+  let EARTH_RADIUS = 250;
   let earth: any; // image
   let angleX: number = 0;
   let angleY: number = -2.4;
@@ -39,7 +39,9 @@ export default function sketch (p: any) {
       })
     }
     if (props.isMobile) {
-      width = 300;
+      width = 400;
+      height = 800;
+      EARTH_RADIUS = 100;
     }
   };
     
