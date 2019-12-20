@@ -39,7 +39,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     return(
       <div className={`${isMobile ? 'mobile' : 'desktop'}`}>
         <HappinessHeader />
-        <div className='globe bg-purple-darker'>
+        <div className='globe bg-purple-darker z-0'>
             <P5Wrapper
               sketch={earth}
               isMobile={isMobile}
@@ -47,11 +47,8 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
+        <CountryStats />
       </div>
-    //   <Sidebar.Pushable as={Segment}>
-    //     <CountryStats />
-    //     <Sidebar.Pusher>
-    //       <Segment basic className="mainContainer">
     //         <div className="mainContainer-icons--topRight">
     //           <Icon name='question' size='large' circular link />
     //           <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
@@ -68,9 +65,6 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     //         <div className="mainContainer-icons--bottomLeft">
     //           <Icon name='arrows alternate' size='large' />
     //         </div>
-    //     </Segment>
-    //     </Sidebar.Pusher>
-    // </Sidebar.Pushable>
     )
   }
 }

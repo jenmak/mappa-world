@@ -29,54 +29,52 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isSidebarVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div> foo </div>
-    // <Sidebar
-    //   as={Grid}
-    //   animation='overlay'
-    //   icon='labeled'
-    //   direction='right'
-    //   onHide={actions.toggleSidebar}
-    //   visible={isSidebarVisible}
-    //   width='wide'
-    // >
-    //   <Grid.Row>
-    //     <Grid.Column width={6}></Grid.Column>
-    //     <Grid.Column width={10}>
-    //       <Header size='tiny'>
-    //       {
-    //         DIMENSIONS_MAP[dimension].IS_BOOLEAN ?
-    //           '% of citizens that answered yes' :
-    //           DIMENSIONS_MAP[dimension].UNITS
-    //       }
-    //       </Header>
-    //     </Grid.Column>
-    //   </Grid.Row>
-    // {
-    //   countries.map((co: any, i: number) => {
-    //     return (i < 25 || showAll) && <Grid.Row key={i} onClick={() => actions.setCurrentCountry(co.Name)}>
-    //         <Grid.Column width={6}>
-    //           {i+1}. {co.Name}
-    //         </Grid.Column>
-    //         <Grid.Column width={10}>
-    //           <Progress
-    //             value={Math.round(co[dimension]*100)/100}
-    //             total={DIMENSIONS_MAP[dimension].MAX}
-    //             size='small'
-    //             progress={ DIMENSIONS_MAP[dimension].IS_BOOLEAN ? 'percent' : 'value' }
-    //             color={co.Name === country ? 'purple' : 'violet'} />
-    //         </Grid.Column>
-    //     </Grid.Row>
-    //   })
-    // }
-    // {
-    //   !showAll &&
-    //   <Grid.Row>
-    //     <Button onClick={() => this.setState({ showAll: !showAll })}>Show all</Button>
-    //   </Grid.Row>
-    // }
-    // </Sidebar>
-    )
-  }
+      <div className="bg-white border border-solid border-white rounded fixed z-10 right-0 top-0 my-56 mx-16 w-1/3 lg:w-1/4">
+        <table className="table-fixed w-full">
+          <thead className="flex w-full">
+            <tr className="flex w-full">
+              <th className="text-gray-400 p-4 font-normal text-xs w-1/2">Countries</th>
+              <th className="p-4 font-normal text-xs w-1/2">
+              {
+                DIMENSIONS_MAP[dimension].IS_BOOLEAN ?
+                  '% of citizens that answered yes' :
+                  DIMENSIONS_MAP[dimension].UNITS
+              }
+              </th>
+            </tr>
+          </thead>
+          <tbody className="overflow-y-scroll flex flex-col items-center justify-between overflow-y-scroll w-full countryStats-body">
+            {
+            countries.map((co: any, i: number) => {
+                return (i < 25 || showAll) &&
+                <tr className="flex w-full cursor-pointer"
+                    key={i} onClick={() => actions.setCurrentCountry(co.Name)}>
+                    <td className="p-2 w-1/2">
+                      {i+1}. {co.Name}
+                    </td>
+                    <td className="p-2 w-1/2">
+                      {Math.round(co[dimension]*100/100)}
+                      {/* <Progress
+                        value={Math.round(co[dimension]*100)/100}
+                        total={DIMENSIONS_MAP[dimension].MAX}
+                        size='small'
+                        progress={ DIMENSIONS_MAP[dimension].IS_BOOLEAN ? 'percent' : 'value' }
+                        color={co.Name === country ? 'purple' : 'violet'} /> */}
+                    </td>
+                </tr>
+              })
+            }
+            {
+              !showAll &&
+              <tr className="flex w-full">
+                <button onClick={() => this.setState({ showAll: !showAll })}>Show all</button>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      )
+    }
 }
 
 

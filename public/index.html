@@ -39,6 +39,10 @@
           padding: 0;
         }
 
+        body {
+          background: #1a1b4b;
+        }
+
         .loading-screen {
           background: #1a1b4b;
           display: flex;
@@ -49,13 +53,18 @@
         }
         .loading-screen-h1 {
           padding: 0;
+          margin: 0;
           color: white;
           font-size: 4rem;
         }
         .loading-screen-h2 {
           padding: 0;
+          margin: 0;
           color: white;
           font-size: 1.875rem;
+        }
+        .loading-screen-accent {
+          color: #3a9efd;
         }
 
     </style>
@@ -65,7 +74,7 @@
     <div id="root">
       <div class="loading-screen">
         <h2 class="loading-screen-h2">Visualizing</h2>
-        <h1 class="loading-screen-h1">World Happiness</h1>
+        <h1 class="loading-screen-h1">World <span class="loading-screen-accent">Happiness</span></h1>
       </div>
     </div>
     <!--

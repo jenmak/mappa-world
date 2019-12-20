@@ -9,7 +9,7 @@ export default function sketch (p: any) {
   
   // canvas
   let width: number = 900;
-  let height: number = 900;
+  let height: number = 1000;
 
   // earth
   let earth: any; // image
