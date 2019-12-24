@@ -47,6 +47,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
+        <QuestionFlipper />
         <CountryStats />
       </div>
     //         <div className="mainContainer-icons--topRight">
@@ -58,9 +59,6 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     //               sketch={legend}
     //               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
     //             />
-    //         </div>
-    //         <div className='questionFlipper'>
-    //           <QuestionFlipper />
     //         </div>
     //         <div className="mainContainer-icons--bottomLeft">
     //           <Icon name='arrows alternate' size='large' />

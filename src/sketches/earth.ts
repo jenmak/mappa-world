@@ -169,7 +169,7 @@ export default function sketch (p: any) {
           break;
       }
       if (size !== 0) {
-        this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 2);
+        this.boxh = p.map(size, DIMENSIONS_MAP[sizeFactor].MIN, DIMENSIONS_MAP[sizeFactor].MAX, 1, 1.6);
       } else {
         this.boxh = 0;
       }

@@ -29,12 +29,12 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isSidebarVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className="fixed z-10 right-0 bottom-0 md:bottom-auto md:top-0 m-12 md:my-56 md:mx-16 md:w-1/3 lg:w-1/4">
-        <div className="bg-white border border-solid border-white rounded ">
+      <div className="fixed z-10 right-0 bottom-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4">
+        <div className="bg-white rounded">
           <table className="table-fixed w-full">
             <thead className="flex w-full">
               <tr className="flex w-full">
-                <th className="text-gray-400 p-4 font-normal text-xs w-1/2">Countries</th>
+                <th className="text-gray-500 p-4 font-normal text-xs w-1/2">Countries</th>
                 <th className="p-4 font-normal text-xs w-1/2">
                 {
                   DIMENSIONS_MAP[dimension].IS_BOOLEAN ?

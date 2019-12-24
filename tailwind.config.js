@@ -7,8 +7,11 @@ module.exports = {
         purple: '#3e4491',
         'purple-dark': '#292a73',
         'purple-darker': '#1a1b4b'
-      }
-
+      },
+      fontFamily: {
+        display: ['Satisfy', 'cursive'],
+        body: ['Playfair Display SC', 'sans-serif'],
+      },
     }
   },
   variants: {},

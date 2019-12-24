@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Button, Grid, Header, Icon } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import * as CountryActions from '../actions';
 import { ICountryState } from '../reducers/countryReducer';
@@ -13,32 +12,30 @@ export interface IQuestionFlipperProps {
 }
 
 const QuestionFlipper = ({ dimensions, questionId, actions}: IQuestionFlipperProps) => (
-  <div>qquestion</div>
-  // <div>
-  //   <Grid verticalAlign='middle'>
-  //     <Grid.Column width='1'>
-  //       <Header size='huge'>“</Header>
-  //     </Grid.Column>
-  //     <Grid.Column width='14'>
-  //       <Header size='medium' as='h2'>{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</Header>
-  //     </Grid.Column>
-  //     <Grid.Column width='1'>
-  //       <Header size='huge'>”</Header>
-  //     </Grid.Column>
-  //   </Grid>
-  //   {
-  //     questionId !== 0 &&
-  //     <Button onClick={actions.getPrevQuestion}>
-  //       <Icon name='arrow left' />
-  //     </Button>
-  //   }
-  //   {
-  //     questionId < dimensions.length - 1 && 
-  //     <Button onClick={actions.getNextQuestion}>
-  //       <Icon name='arrow right' />
-  //     </Button>
-  //   }
-  // </div>
+  <div className="fixed z-40 top-0 right-0 mx-16 my-16 md:w-1/3 lg:w-1/4">
+    <div className="bg-white rounded shadow-md p-5">
+    {
+      (DIMENSIONS_MAP[dimensions[questionId]].IS_BOOLEAN ||
+      questionId === 0) &&
+      <h5 className="text-gray-600 font-body mb-3">Citizens were asked,</h5>
+    }
+      <h3 className="text-black mb-3">{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</h3>
+      <div className="flex justify-between">
+      {
+        questionId !== 0 &&
+        <button className="text-xs text-left text-gray-700" onClick={actions.getPrevQuestion}>
+          See previous
+        </button>
+      }
+      {
+        questionId < dimensions.length - 1 && 
+        <button className="text-xs text-right text-gray-700" onClick={actions.getNextQuestion}>
+          See next question
+        </button>
+      }
+      </div>
+    </div>
+  </div>
 )
 
 const mapStateToProps = (state: { data: ICountryState}) => ({
