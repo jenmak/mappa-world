@@ -8,7 +8,7 @@ export default function sketch (p: any) {
   
   // canvas
   let width: number = 900;
-  let height: number = 1000;
+  let height: number = 800;
 
   // earth
   let EARTH_RADIUS = 250;

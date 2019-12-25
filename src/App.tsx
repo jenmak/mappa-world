@@ -1,6 +1,5 @@
 import React from 'react';
 import CountryStats from './components/country-stats';
-// import GlobeContainer from './components/globe-container';
 import QuestionFlipper from './components/question-flipper';
 import legend from './sketches/legend';
 import earth from './sketches/earth';
@@ -47,22 +46,15 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
+        <div className='legend fixed bottom-0 left-0 z-30 mb-32 ml-16'>
+          <P5Wrapper
+              sketch={legend}
+              sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
+            />
+        </div>
         <QuestionFlipper />
         <CountryStats />
       </div>
-    //         <div className="mainContainer-icons--topRight">
-    //           <Icon name='question' size='large' circular link />
-    //           <Icon onClick={actions.toggleSidebar} name='chart bar outline' rotated='clockwise' size='large' circular link />
-    //         </div>
-    //         <div className='legend'>
-    //           <P5Wrapper
-    //               sketch={legend}
-    //               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
-    //             />
-    //         </div>
-    //         <div className="mainContainer-icons--bottomLeft">
-    //           <Icon name='arrows alternate' size='large' />
-    //         </div>
     )
   }
 }

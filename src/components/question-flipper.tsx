@@ -12,7 +12,7 @@ export interface IQuestionFlipperProps {
 }
 
 const QuestionFlipper = ({ dimensions, questionId, actions}: IQuestionFlipperProps) => (
-  <div className="fixed z-40 top-0 right-0 mx-16 my-16 md:w-1/3 lg:w-1/4">
+  <div className="fixed z-40 top-0 left-0 mx-16 my-16 md:w-1/3 lg:w-1/4">
     <div className="bg-white rounded shadow-md p-5">
     {
       (DIMENSIONS_MAP[dimensions[questionId]].IS_BOOLEAN ||
