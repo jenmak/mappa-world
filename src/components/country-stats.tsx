@@ -9,7 +9,7 @@ import * as CountryActions from '../actions';
 export interface ICountryStatsProps {
   country: any;
   countries: any[];
-  isSidebarVisible: boolean;
+  isGlobeVisible: boolean;
   dimension: string;
   actions: any;
 }
@@ -26,10 +26,10 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
   }
 
   render() {
-    const { actions, country, countries, dimension, isSidebarVisible } = this.props;
+    const { actions, country, countries, dimension, isGlobeVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className="fixed z-10 right-0 bottom-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4">
+      <div className={`fixed z-10 right-0 bottom-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
         <div className="bg-white rounded">
           <table className="table-fixed w-full">
             <thead className="flex w-full">
@@ -84,7 +84,7 @@ const mapStateToProps = (state: { data: ICountryState }) => ({
     (b[state.data.dimensions[state.data.questionId]] - a[state.data.dimensions[state.data.questionId]])
   ),
   dimension: state.data.dimensions[state.data.questionId],
-  isSidebarVisible: state.data.isSidebarVisible
+  isGlobeVisible: state.data.isGlobeVisible
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

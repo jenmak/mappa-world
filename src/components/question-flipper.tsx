@@ -8,11 +8,12 @@ import { DIMENSIONS_MAP } from '../constants/dimensions';
 export interface IQuestionFlipperProps {
   dimensions: string[];
   questionId: number;
+  isGlobeVisible: boolean;
   actions: any;
 }
 
-const QuestionFlipper = ({ dimensions, questionId, actions}: IQuestionFlipperProps) => (
-  <div className="fixed z-40 top-0 left-0 mx-16 my-16 md:w-1/3 lg:w-1/4">
+const QuestionFlipper = ({ dimensions, questionId, isGlobeVisible, actions}: IQuestionFlipperProps) => (
+  <div className={`fixed z-40 top-0 left-0 mx-16 my-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
     <div className="bg-white rounded shadow-md p-5">
     {
       (DIMENSIONS_MAP[dimensions[questionId]].IS_BOOLEAN ||
@@ -40,7 +41,8 @@ const QuestionFlipper = ({ dimensions, questionId, actions}: IQuestionFlipperPro
 
 const mapStateToProps = (state: { data: ICountryState}) => ({
   dimensions: state.data.dimensions,
-  questionId: state.data.questionId
+  questionId: state.data.questionId,
+  isGlobeVisible: state.data.isGlobeVisible
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

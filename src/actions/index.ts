@@ -13,6 +13,6 @@ export const setCurrentCountry = (country: string) => ({
     country
 })
 
-export const toggleSidebar = () => ({
-    type: TYPES.TOGGLE_SIDEBAR
+export const toggleVisibility = () => ({
+    type: TYPES.TOGGLE_VISIBILITY
 })

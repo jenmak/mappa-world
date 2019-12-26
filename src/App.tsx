@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import * as CountryActions from './actions';
 import HappinessHeader from './components/happiness-header';
 
-class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isSidebarVisible: boolean }, { width: number }> {
+class App extends React.Component<{ actions: any, country: any, dimensions: string[], questionId: number, isGlobeVisible: boolean }, { width: number }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -32,7 +32,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
   }
 
   render() {
-    const { actions, country, dimensions, questionId, isSidebarVisible } = this.props;
+    const { country, dimensions, questionId, isGlobeVisible } = this.props;
     const { width } = this.state;
     const isMobile = width <= 500;
     return(
@@ -46,7 +46,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
-        <div className='legend fixed bottom-0 left-0 z-30 mb-32 ml-16'>
+        <div className={`legend fixed bottom-0 left-0 z-30 mb-32 ml-16 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
           <P5Wrapper
               sketch={legend}
               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
@@ -63,7 +63,7 @@ const mapStateToProps = (state: { data: any}) => ({
   country: state.data.country,
   dimensions: state.data.dimensions,
   questionId: state.data.questionId,
-  isSidebarVisible: state.data.isSidebarVisible
+  isGlobeVisible: state.data.isGlobeVisible
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
