@@ -3,13 +3,11 @@
 @tailwind utilities;
 
 .fadeOut{
-    /* top: -5px; */
     opacity:0;
     visibility: hidden;
     transition: all 0.5s;
 }
 .fadeIn{
-    /* top: 0; */
     opacity:1;
     visibility: visible;
     transition: all 0.5s 0.5s;
@@ -22,8 +20,17 @@
     height: 100vh;
 }
 
+.countryStats-bkg {
+    height: 640px;
+}
 .countryStats-body {
-    height: 200px;
+    height: 600px;
+}
+
+circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
 }
 
 

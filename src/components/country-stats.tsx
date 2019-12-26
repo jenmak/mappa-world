@@ -1,11 +1,10 @@
 import React from 'react';
-import { DIMENSIONS_MAP } from '../constants/dimensions';
-// import { Progress, Sidebar, Header, Grid, Button } from 'semantic-ui-react'
+import { DIMENSIONS_MAP, DIMENSION_NAMES } from '../constants/dimensions';
 import { connect } from 'react-redux';
 import { ICountryState } from '../reducers/countryReducer';
 import { bindActionCreators } from 'redux';
 import * as CountryActions from '../actions';
-
+import PercentageRing from './percentage-ring';
 export interface ICountryStatsProps {
   country: any;
   countries: any[];
@@ -29,50 +28,42 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isGlobeVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className={`fixed z-10 right-0 bottom-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
-        <div className="bg-white rounded">
-          <table className="table-fixed w-full">
-            <thead className="flex w-full">
-              <tr className="flex w-full">
-                <th className="text-gray-500 p-4 font-normal text-xs w-1/2">Countries</th>
-                <th className="p-4 font-normal text-xs w-1/2">
-                {
-                  DIMENSIONS_MAP[dimension].IS_BOOLEAN ?
-                    '% of citizens that answered yes' :
-                    DIMENSIONS_MAP[dimension].UNITS
-                }
-                </th>
-              </tr>
-            </thead>
-            <tbody className="overflow-y-scroll flex flex-col items-center justify-between overflow-y-scroll w-full countryStats-body">
-              {
-              countries.map((co: any, i: number) => {
-                  return (i < 25 || showAll) &&
-                  <tr className="flex w-full cursor-pointer"
-                      key={i} onClick={() => actions.setCurrentCountry(co.Name)}>
-                      <td className="p-2 w-1/2 text-xs">
-                        {i+1}. {co.Name}
-                      </td>
-                      <td className="p-2 w-1/2 text-xs">
-                        <div className="shadow w-full bg-grey-light rounded">
-                          <div className={ `${co.Name === country ? 'bg-mustard' : 'bg-purple-dark'}`}
-                                style={{'width': `${ co[dimension]/DIMENSIONS_MAP[dimension].MAX*100 }%`}}>
-                            {Math.round(co[dimension]*100)/100}
-                          </div>
-                        </div>
-                        {/* TODO: progress={ DIMENSIONS_MAP[dimension].IS_BOOLEAN ? 'percent' : 'value' } */}
-                      </td>
-                  </tr>
-                })
-              }
-              </tbody>
-            </table>
-          </div>
+      <div className={`fixed z-10 right-0 top-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+        <div className="absolute opacity-50 bg-purple-dark w-full z-40 rounded shadow-sm countryStats-bkg"></div>
+        <div className="absolute z-50 w-full">
+        <div className="text-xs text-white text-right p-3">
           {
-            !showAll &&
-              <button className="w-full text-sm bg-purple-dark text-white p-2 rounded shadow-sm mt-2" onClick={() => this.setState({ showAll: !showAll })}>Show all</button>
+            DIMENSIONS_MAP[dimension].IS_BOOLEAN ?
+              '% of citizens that answered yes' :
+              DIMENSIONS_MAP[dimension].UNITS
           }
         </div>
+        <div className="overflow-y-scroll w-full countryStats-body">
+        {
+          countries.map((co: any, i: number) => {
+              return (i < 25 || showAll) &&
+              <div className="p-3 flex flex-row items-center justify-between cursor-pointer hover:bg-purple-dark"
+                  key={i}
+                  onClick={() => actions.setCurrentCountry(co.Name)}>     
+                <div className="flex flex-row items-center">           
+                  <PercentageRing radius={20} stroke={3} text={i+1} color={co[DIMENSION_NAMES.LIFE_LADDER]} progress={co[dimension]/DIMENSIONS_MAP[dimension].MAX*100} />
+                  <p className={`text-sm mx-3 ${co.Name === country ? 'text-mustard' : 'text-white'}`}>{ co.Name }</p>
+                </div>
+                {
+                  DIMENSIONS_MAP[dimension].IS_BOOLEAN ? 
+                  <p className="text-white text-sm">{Math.round(co[dimension]/DIMENSIONS_MAP[dimension].MAX*100) + '%' }</p> :
+                  <p className="text-white text-sm">{Math.round(co[dimension])} { dimension === DIMENSION_NAMES.LIFE_LADDER && '/' + DIMENSIONS_MAP[dimension].MAX}</p>
+                }
+              </div>
+            })
+          }
+        </div>
+        {
+            !showAll &&
+            <button className="w-full text-sm bg-purple-dark text-white p-2 rounded shadow-sm mt-2" onClick={() => this.setState({ showAll: !showAll })}>Show all</button>
+        }
+        </div>
+      </div>
       )
     }
 }
