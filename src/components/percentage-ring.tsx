@@ -30,7 +30,6 @@ class PercentageRing extends React.Component<
           strokeWidth={ stroke }
           strokeDasharray={ this.state.circumference + ' ' + this.state.circumference }
           style={ { strokeDashoffset } }
-          stroke-width={ stroke }
           r={ this.state.normalizedRadius }
           cx={ radius }
           cy={ radius }

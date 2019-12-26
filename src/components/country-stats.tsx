@@ -28,7 +28,7 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isGlobeVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className={`fixed z-10 right-0 top-0 m-12 md:my-24 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+      <div className={`fixed z-10 right-0 top-0 m-12 md:my-16 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
         <div className="absolute opacity-50 bg-purple-dark w-full z-40 rounded shadow-sm countryStats-bkg"></div>
         <div className="absolute z-50 w-full">
         <div className="text-xs text-white text-right p-3">
@@ -52,7 +52,7 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
                 {
                   DIMENSIONS_MAP[dimension].IS_BOOLEAN ? 
                   <p className="text-white text-sm">{Math.round(co[dimension]/DIMENSIONS_MAP[dimension].MAX*100) + '%' }</p> :
-                  <p className="text-white text-sm">{Math.round(co[dimension])} { dimension === DIMENSION_NAMES.LIFE_LADDER && '/' + DIMENSIONS_MAP[dimension].MAX}</p>
+                  <p className="text-white text-sm">{Math.round(co[dimension])}{ dimension === DIMENSION_NAMES.LIFE_LADDER && '/' + DIMENSIONS_MAP[dimension].MAX}</p>
                 }
               </div>
             })
