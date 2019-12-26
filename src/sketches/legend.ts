@@ -29,6 +29,9 @@ export default function sketch (p: any) {
     p.textSize(12);
     p.text('Happiness', 20, 35);
     p.text(sizeFactor, 20, 55, 100);
+    p.textSize(10);
+    p.text('less', 100, 10);
+    p.text('more', 280, 10)
     p.pop();
 
 
