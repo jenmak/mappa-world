@@ -35,7 +35,7 @@ export const DIMENSIONS_MAP: any = {
     AVERAGE: .78453,
     MIN: .3,
     MAX: 1,
-    QUESTION: 'Are you satisfied or dissatisfied with your freedom to choose what you do with your life?'
+    QUESTION: 'Are you satisfied with your freedom to choose what you do with your life?'
   },
   'Generosity': {
     SHORT: 'Generosity',
