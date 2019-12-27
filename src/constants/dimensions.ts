@@ -46,7 +46,7 @@ export const DIMENSIONS_MAP: any = {
     QUESTION: 'Have you donated money to a charity in the past month?'
   },
   'Healthy life expectancy at birth': {
-    SHORT: 'Life expectancy',
+    SHORT: 'Healthy life expectancy',
     IS_BOOLEAN: false,
     AVERAGE: 64.6708,
     MIN: 48,

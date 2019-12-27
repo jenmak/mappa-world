@@ -53,6 +53,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
             />
         </div>
+        <p className={`hidden sm:block fixed bottom-0 left-0 right-0 text-xs uppercase text-purple text-center p-5 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>Drag to move</p>
         <CountryStats />
       </div>
     )

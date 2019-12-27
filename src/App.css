@@ -14,10 +14,10 @@
         transition: all 0.5s 0.5s;
     }
     .countryStats-bkg {
-        height: 640px;
+        height: 600px;
     }
     .countryStats-body {
-        height: 600px;
+        height: 560px;
     }
 }
 
