@@ -2,29 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-.fadeOut{
-    opacity:0;
-    visibility: hidden;
-    transition: all 0.5s;
-}
-.fadeIn{
-    opacity:1;
-    visibility: visible;
-    transition: all 0.5s 0.5s;
-}
-
-.globe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.countryStats-bkg {
-    height: 640px;
-}
-.countryStats-body {
-    height: 600px;
+@media (min-width: 640px) {
+    .fadeOut{
+        opacity:0;
+        visibility: hidden;
+        transition: all 0.5s;
+    }
+    .fadeIn{
+        opacity:1;
+        visibility: visible;
+        transition: all 0.5s 0.5s;
+    }
+    .countryStats-bkg {
+        height: 640px;
+    }
+    .countryStats-body {
+        height: 600px;
+    }
 }
 
 circle {
@@ -32,10 +26,3 @@ circle {
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
-
-
-/* @media (min-width: 768px) {
-}
-.mobile {
-} */
-/* linear-gradient(115deg, rgba(86, 216, 228,1) 5%,rgba(159, 1, 234,1) 95%) */

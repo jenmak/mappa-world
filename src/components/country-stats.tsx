@@ -28,9 +28,9 @@ class CountryStats extends React.Component<ICountryStatsProps, ICountryStatsStat
     const { actions, country, countries, dimension, isGlobeVisible } = this.props;
     let { showAll } = this.state;
     return (
-      <div className={`fixed z-10 right-0 top-0 m-12 md:my-16 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
-        <div className="absolute opacity-50 bg-purple-dark w-full z-40 rounded shadow-sm countryStats-bkg"></div>
-        <div className="absolute z-50 w-full">
+      <div className={`sm:fixed z-10 right-0 top-0 m-4 sm:m-12 md:my-16 md:mx-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+        <div className="sm:absolute opacity-50 bg-purple-dark w-full z-40 sm:rounded sm:shadow-sm countryStats-bkg"></div>
+        <div className="sm:absolute z-50 w-full">
         <div className="text-xs text-white text-right p-3">
           {
             DIMENSIONS_MAP[dimension].IS_BOOLEAN ?

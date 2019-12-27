@@ -10,15 +10,15 @@ export interface IHappinessHeaderProps {
 
 const HappinessHeader = ({ actions, isGlobeVisible }: IHappinessHeaderProps) => (
   <div className={isGlobeVisible?'fadeOut': 'fadeIn'}>
-    <div className="bg-purple-darker opacity-75 fixed z-50 w-full h-screen"></div>
-    <div className="p-24 flex flex-col justify-center w-full h-screen fixed z-50 cursor-pointer"
+    <div className="bg-purple-darker opacity-75 sm:fixed z-50 w-full sm:h-screen"></div>
+    <div className="px-4 py-12 sm:p-24 flex flex-col justify-center w-full sm:h-screen sm:fixed z-50 cursor-pointer"
           onClick={actions.toggleVisibility}>
       <div>
         <h2 className="text-2xl md:text-3xl text-white">Visualizing</h2>
         <h1 className="text-4xl md:text-6xl text-white">World <span className="text-cyan">Happiness</span></h1>
       </div>
       <div>
-        <button className="text-cyan fixed z-80" onClick={() => actions.toggleVisibility}>Click to view</button>
+        <button className="text-cyan fixed z-80 hidden sm:block" onClick={() => actions.toggleVisibility}>Click to view</button>
       </div>
     </div>
   </div>

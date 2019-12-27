@@ -1,7 +1,7 @@
 export default function sketch (p: any) {
 
   // canvas
-  let width: number = 600;
+  let width: number = 375;
   let height: number = 120;
 
   let sizeFactor: string = '';

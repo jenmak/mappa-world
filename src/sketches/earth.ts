@@ -3,6 +3,8 @@ import { DIMENSION_NAMES, DIMENSIONS_MAP } from '../constants/dimensions';
 export const HALF_PI = Math.PI/2;
 
 export default function sketch (p: any) {
+
+  let isMobile = false;
   // selected country animation
   let pulse = 0;
   
@@ -39,9 +41,10 @@ export default function sketch (p: any) {
       })
     }
     if (props.isMobile) {
-      width = 400;
-      height = 800;
+      width = 375;
+      height = 400;
       EARTH_RADIUS = 100;
+      isMobile = true;
     }
   };
     
@@ -57,8 +60,10 @@ export default function sketch (p: any) {
   }
 
   p.mouseDragged = function() {
-    angleY += (p.mouseX - p.pmouseX) * 0.03;
-    angleX += (p.mouseY - p.pmouseY) * -0.01;
+    if (!isMobile) {
+      angleY += (p.mouseX - p.pmouseX) * 0.03;
+      angleX += (p.mouseY - p.pmouseY) * -0.01;
+    }
   }
 
   p.draw = function() {
@@ -182,7 +187,7 @@ export default function sketch (p: any) {
       p.translate(this.coord.x*this.boxh, this.coord.y*this.boxh, this.coord.z*this.boxh);
       p.noStroke();
       p.fill(Math.floor(this.rv), 188, 255); // 151, blue to 222, pink
-      p.sphere(this.boxh*5);
+      p.sphere(this.boxh*(isMobile ? 2 : 5));
 
       if (this.isSelected) {
         this.drawSelected();

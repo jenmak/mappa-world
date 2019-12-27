@@ -14,18 +14,18 @@ export interface IQuestionFlipperProps {
 }
 
 const QuestionFlipper = ({ countries, dimensions, questionId, isGlobeVisible, actions}: IQuestionFlipperProps) => (
-  <div className={`fixed z-40 top-0 left-0 mx-16 my-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
-    <div className="bg-white rounded shadow-md p-5">
+  <div className={`sm:fixed z-40 top-0 left-0 sm:mx-16 sm:my-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+    <div className="sm:bg-white sm:rounded sm:shadow-md p-5 bg-purple">
     {
       (DIMENSIONS_MAP[dimensions[questionId]].IS_BOOLEAN ||
       questionId === 0) &&
-      <h5 className="text-gray-600 font-body mb-3">Citizens were asked,</h5>
+      <h5 className="text-white sm:text-gray-600 font-body mb-3">Citizens were asked,</h5>
     }
-      <h3 className="text-black mb-3">{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</h3>
+      <h3 className="text-gray-100 sm:text-black mb-3">{ DIMENSIONS_MAP[dimensions[questionId]].QUESTION }</h3>
       <div className="flex justify-between">
       {
         questionId !== 0 &&
-        <button className="text-xs text-left text-gray-700"
+        <button className="text-xs text-left text-white sm:text-gray-700 p-3 border border-solid border-white rounded sm:border-none"
           onClick={() => {
             actions.getPrevQuestion();
             setTimeout(() => {
@@ -37,7 +37,7 @@ const QuestionFlipper = ({ countries, dimensions, questionId, isGlobeVisible, ac
       }
       {
         questionId < dimensions.length - 1 && 
-        <button className="text-xs text-right text-gray-700"
+        <button className="text-xs text-right text-white sm:text-gray-700 p-3 border border-solid border-white rounded sm:border-purple"
           onClick={() => {
             actions.getNextQuestion();
             setTimeout(() => {

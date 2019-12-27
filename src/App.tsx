@@ -19,7 +19,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener('resize', this.handleWindowSizeChange);
   }
 
@@ -34,11 +34,12 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
   render() {
     const { country, dimensions, questionId, isGlobeVisible } = this.props;
     const { width } = this.state;
-    const isMobile = width <= 500;
+    const isMobile = width <= 640;
     return(
       <div className={`${isMobile ? 'mobile' : 'desktop'}`}>
         <HappinessHeader />
-        <div className='globe bg-purple-darker z-0'>
+        <QuestionFlipper />
+        <div className='globe bg-purple-darker z-0 flex justify-center align-center h-auto md:h-screen'>
             <P5Wrapper
               sketch={earth}
               isMobile={isMobile}
@@ -46,13 +47,12 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
-        <div className={`legend fixed bottom-0 left-0 z-30 mb-32 ml-16 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+        <div className={`sm:fixed bottom-0 left-0 z-30 sm:mb-32 sm:ml-16 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
           <P5Wrapper
               sketch={legend}
               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
             />
         </div>
-        <QuestionFlipper />
         <CountryStats />
       </div>
     )
