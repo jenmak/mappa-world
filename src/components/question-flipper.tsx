@@ -14,7 +14,7 @@ export interface IQuestionFlipperProps {
 }
 
 const QuestionFlipper = ({ countries, dimensions, questionId, isGlobeVisible, actions}: IQuestionFlipperProps) => (
-  <div className={`sm:fixed z-40 top-0 left-0 sm:mx-16 sm:my-16 md:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+  <div className={`sm:fixed z-40 top-0 left-0 sm:mx-16 sm:my-16 sm:w-1/3 lg:w-1/4 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
     <div className="sm:bg-white sm:rounded sm:shadow-md p-5 bg-purple">
     {
       (DIMENSIONS_MAP[dimensions[questionId]].IS_BOOLEAN ||

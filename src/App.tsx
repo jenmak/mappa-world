@@ -47,7 +47,7 @@ class App extends React.Component<{ actions: any, country: any, dimensions: stri
               sizeFactor={dimensions[questionId]}
             />
         </div>
-        <div className={`sm:fixed bottom-0 left-0 z-30 sm:mb-32 sm:ml-16 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
+        <div className={`sm:fixed bottom-0 left-0 z-30 sm:mb-8 md:mb-32 sm:ml-16 ${isGlobeVisible ? 'fadeIn' : 'fadeOut'}`}>
           <P5Wrapper
               sketch={legend}
               sizeFactor={DIMENSIONS_MAP[dimensions[questionId]].SHORT}
