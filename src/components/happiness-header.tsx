@@ -18,7 +18,7 @@ const HappinessHeader = ({ actions, isGlobeVisible }: IHappinessHeaderProps) => 
         <h1 className="text-4xl md:text-6xl text-white">World <span className="text-cyan">Happiness</span></h1>
       </div>
       <div>
-        <p className="text-white py-5 sm:w-2/3">The following is a visualization of world happiness based on data from the Gallup World Poll for the <a className="underline text-cyan" rel="noopener noreferrer" target="_blank" href="https://worldhappiness.report/">World Happiness Report</a>. Citizens were asked a series of questions related to how happy they percieve themselves to be, focusing on factors such as government corruption, social support and freedom of choice.</p>
+        <p className="text-white py-5 sm:w-2/3">The following is a visualization of world happiness based on data from the Gallup World Poll for the <a className="underline text-cyan" rel="noopener noreferrer" target="_blank" href="https://worldhappiness.report/">World Happiness Report</a>. Citizens were asked a series of questions related to how happy they perceive themselves to be, focusing on factors such as government corruption, social support and freedom of choice.</p>
         <button className="text-cyan fixed z-80 hidden sm:block" onClick={() => actions.toggleVisibility}>Click to view</button>
       </div>
     </div>
