@@ -8,8 +8,9 @@ import * as serviceWorker from './serviceWorker';
 import './App.css';
 import ReactGA from 'react-ga';
 
-const trackingId = "UA-72958652-3"; // Replace with your Google Analytics tracking ID
+const trackingId = "UA-72958652-3";
 ReactGA.initialize(trackingId);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const store = createStore(rootReducer);
 
