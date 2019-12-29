@@ -6,6 +6,10 @@ import rootReducer from './reducers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './App.css';
+import ReactGA from 'react-ga';
+
+const trackingId = "UA-72958652-3"; // Replace with your Google Analytics tracking ID
+ReactGA.initialize(trackingId);
 
 const store = createStore(rootReducer);
 
